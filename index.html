@@ -3,18 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Migrant Support — Preview</title>
-    <!-- Tailwind Play CDN (easy, no build step) -->
+    <title>ApoyoYA — Clear information and nearby help</title>
+
+    <!-- Tailwind (no build step) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      // Optional: customize Tailwind (kept minimal)
       tailwind.config = {
         theme: { extend: {} },
         corePlugins: { preflight: true }
       };
     </script>
 
-    <!-- React 18 UMD + Babel for in-browser JSX transform -->
+    <!-- React 18 UMD + Babel (for in-browser JSX) -->
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -30,9 +30,7 @@
     <script type="text/babel">
       const { useMemo, useState, useContext, createContext, useEffect } = React;
 
-      // -----------------------------
-      // I18n
-      // -----------------------------
+      // i18n context
       const SUPPORTED_LANGS = ["es", "en"];
       const LangCtx = createContext({ lang: "es", setLang: () => {} });
       const useI18n = () => useContext(LangCtx);
@@ -42,44 +40,45 @@
           brand: "Apoyo a Inmigrantes",
           nav: { derechos: "Conozca Sus Derechos", buscador: "Recursos Legales Cercanos", red: "Apoyo Mutuo Cercano", edu: "Centro Educativo" },
           hero: {
-            title: "Información clara y ayuda cercana, en español",
-            body: "Recursos confiables para conocer tus derechos, encontrar apoyo legal, ubicar centros de apoyo mutuo y aprender con vídeos cortos.",
+            title: "Información clara y ayuda cercana, en español e inglés",
+            body: "Recursos confiables para conocer sus derechos, encontrar ayuda legal, ubicar centros de apoyo mutuo y aprender con videos cortos.",
             ctaPrimary: "Ver derechos ahora",
             ctaSecondary: "Recursos legales cercanos",
             disclaimer: "Esta información es educativa; no es asesoría legal.",
-            listTitle: "Comienza con estos 3 pasos",
-            list1: "Guarda la tarjeta de derechos en tu teléfono.",
-            list2: "Anota un contacto de emergencia.",
-            list3: "Identifica ayuda legal cercana.",
+            listTitle: "Comience con estos 3 pasos",
+            list1: "Guarde la tarjeta de derechos en su teléfono.",
+            list2: "Anote un contacto de emergencia.",
+            list3: "Identifique ayuda legal cercana."
           },
           sections: {
             kyrTitle: "Conozca Sus Derechos",
-            kyrSub: "Vídeos breves, guías descargables y pasos claros para situaciones comunes.",
+            kyrSub: "Videos breves, guías descargables y pasos claros para situaciones comunes.",
             finderTitle: "Recursos Legales Cercanos",
-            finderSub: "Encuentra ayuda legal confiable por zona y categoría.",
+            finderSub: "Encuentre ayuda legal confiable por zona y categoría.",
             mutualTitle: "Apoyo Mutuo Cercano",
             mutualSub: "Mapa de centros confiables cercanos (bancos de alimentos, clases de inglés, refugios).",
-            eduTitle: "Centro Educativo (Vídeos)",
-            eduSub: "Aprende con vídeos breves y materiales descargables.",
+            eduTitle: "Centro Educativo (Videos)",
+            eduSub: "Aprenda con videos breves y materiales descargables."
           },
           sectionDescs: {
-            kyr: "Vídeos cortos y guías simples para actuar con calma.",
-            finder: "Organizaciones y abogados confiables cerca de ti.",
-            mutual: "Centros de apoyo comunitario en tu área.",
-            edu: "Aprende sobre trabajo, salud, escuela y más."
+            kyr: "Videos cortos y guías simples para actuar con calma.",
+            finder: "Organizaciones y abogados confiables cerca de usted.",
+            mutual: "Centros de apoyo comunitario en su área.",
+            edu: "Aprenda sobre trabajo, salud, escuela y más."
           },
           labels: {
-            langToggle: "Cambiar a inglés", langToggleAlt: "Cambiar a español", zipcode: "Código postal", category: "Categoría", proBonoOnly: "Solo pro bono",
-            noResults: "No hay resultados. Prueba otra categoría o amplía el área.",
-            mapNote: "Nota: Este mapa es un ejemplo.",
+            langToggle: "Cambiar a inglés", langToggleAlt: "Cambiar a español",
+            zipcode: "Código postal", category: "Categoría", proBonoOnly: "Solo pro bono",
+            noResults: "No hay resultados. Pruebe otra categoría o amplíe el área.",
+            mapNote: "Nota: este mapa es un ejemplo.",
             mapPlaceholder: "Mapa (banco de alimentos)",
             call: "Llamar", website: "Sitio web",
             chatOpen: "Chat de ayuda (GPT-5)", chatTitle: "Asistente (educativo)",
             chatDisclaimer: "Respuestas educativas; no es asesoría legal.",
-            chatPlaceholder: "Escribe tu pregunta aquí…", chatSend: "Enviar", chatClose: "Cerrar", chatPoweredBy: "Impulsado por GPT-5",
-            runTests: "Probar UI", testsPassing: "Pruebas OK", testsFailing: "Pruebas fallan", subtitles: "Subtítulos", play: "Reproducir",
-            downloads: "Descargables", checklist: "Checklist (PDF)", glossary: "Glosario (PDF)",
-          },
+            chatPlaceholder: "Escriba su pregunta…", chatSend: "Enviar", chatClose: "Cerrar", chatPoweredBy: "Impulsado por GPT-5",
+            runTests: "Probar UI", testsPassing: "Pruebas OK", testsFailing: "Pruebas fallan",
+            subtitles: "Subtítulos", play: "Reproducir", downloads: "Descargables", checklist: "Lista (PDF)", glossary: "Glosario (PDF)"
+          }
         },
         en: {
           brand: "Immigrant Support",
@@ -93,7 +92,7 @@
             listTitle: "Start with these 3 steps",
             list1: "Save the rights card to your phone.",
             list2: "Write down an emergency contact.",
-            list3: "Identify nearby legal help.",
+            list3: "Identify nearby legal help."
           },
           sections: {
             kyrTitle: "Know Your Rights",
@@ -103,7 +102,7 @@
             mutualTitle: "Mutual Aid Nearby",
             mutualSub: "Map of trusted local centers (food banks, ESL classes, shelters).",
             eduTitle: "Education Hub (Videos)",
-            eduSub: "Learn with short videos and downloadable materials.",
+            eduSub: "Learn with short videos and downloadable materials."
           },
           sectionDescs: {
             kyr: "Short videos and simple guides to stay calm and act.",
@@ -112,53 +111,49 @@
             edu: "Learn about work, health, school, and more."
           },
           labels: {
-            langToggle: "Switch to English", langToggleAlt: "Switch to Spanish", zipcode: "ZIP code", category: "Category", proBonoOnly: "Pro bono only",
+            langToggle: "Switch to English", langToggleAlt: "Switch to Spanish",
+            zipcode: "ZIP code", category: "Category", proBonoOnly: "Pro bono only",
             noResults: "No results. Try another category or expand the area.",
-            mapNote: "Note: This map is a placeholder.",
+            mapNote: "Note: this map is a placeholder.",
             mapPlaceholder: "Map (food bank theme)",
             call: "Call", website: "Website",
             chatOpen: "Chat help (GPT-5)", chatTitle: "Assistant (educational)",
             chatDisclaimer: "Educational responses; not legal advice.",
-            chatPlaceholder: "Type your question here…", chatSend: "Send", chatClose: "Close", chatPoweredBy: "Powered by GPT-5",
-            runTests: "Run UI checks", testsPassing: "Tests passing", testsFailing: "Tests failing", subtitles: "Captions", play: "Play",
-            downloads: "Downloads", checklist: "Checklist (PDF)", glossary: "Glossary (PDF)",
-          },
+            chatPlaceholder: "Type your question…", chatSend: "Send", chatClose: "Close", chatPoweredBy: "Powered by GPT-5",
+            runTests: "Run UI checks", testsPassing: "Tests passing", testsFailing: "Tests failing",
+            subtitles: "Captions", play: "Play", downloads: "Downloads", checklist: "Checklist (PDF)", glossary: "Glossary (PDF)"
+          }
         }
       };
       const safeCopy = (lang) => COPY[SUPPORTED_LANGS.includes(lang || "") ? lang : "es"];
 
       const CATEGORY_LABELS = {
         es: { asilo: "Asilo", daca: "DACA", defensa: "Defensa contra deportación", trabajo: "Trabajo", vivienda: "Vivienda", salud: "Salud" },
-        en: { asilo: "Asylum", daca: "DACA", defensa: "Removal defense", trabajo: "Work", vivienda: "Housing", salud: "Health" },
+        en: { asilo: "Asylum", daca: "DACA", defensa: "Removal defense", trabajo: "Work", vivienda: "Housing", salud: "Health" }
       };
       const CATEGORIES = ["asilo", "daca", "defensa", "trabajo", "vivienda", "salud"];
 
-      // Data
+      // Mock content for the homepage sections (the real finder lives on /finder.html)
       const MOCK_VIDEOS_KYR = [
         { id: "kyr1", title: { es: "Qué hacer si ICE toca a tu puerta", en: "What to do if ICE knocks" }, duration: "1:30", captions: true, thumbnail: "https://images.unsplash.com/photo-1551836022-4c4c79ecde51?q=80&w=1200&auto=format&fit=crop" },
         { id: "kyr2", title: { es: "Tus derechos en un control policial", en: "Your rights at a traffic stop" }, duration: "1:45", captions: true, thumbnail: "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1200&auto=format&fit=crop" },
         { id: "kyr3", title: { es: "Cómo preparar un plan familiar de emergencia", en: "How to make a family emergency plan" }, duration: "1:20", captions: true, thumbnail: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop" },
-        { id: "kyr4", title: { es: "Tarjeta de derechos: cómo usarla", en: "Rights card: how to use it" }, duration: "1:10", captions: true, thumbnail: "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1200&auto=format&fit=crop" },
+        { id: "kyr4", title: { es: "Tarjeta de derechos: cómo usarla", en: "Rights card: how to use it" }, duration: "1:10", captions: true, thumbnail: "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1200&auto=format&fit=crop" }
       ];
       const MOCK_RESOURCES = [
         { id: 1, name: "Centro Legal Esperanza", phone: "(404) 555-0199", website: "#", address: "123 Peachtree St, Atlanta, GA", languages: ["es","en"], categories: ["asilo","defensa"], pro_bono: true, wait_days: 5, zip: "30303" },
-        { id: 2, name: "Defensa Comunitaria ATL", phone: "(404) 555-0142", website: "#", address: "45 Ponce De Leon Ave, Atlanta, GA", languages: ["es"], categories: ["defensa"], pro_bono: false, wait_days: 2, zip: "30308" },
-        { id: 3, name: "Red de Derechos Laborales", phone: "(404) 555-0167", website: "#", address: "200 Auburn Ave NE, Atlanta, GA", languages: ["es","en"], categories: ["trabajo"], pro_bono: true, wait_days: 7, zip: "30312" },
-        { id: 4, name: "Casa Salud", phone: "(404) 555-0123", website: "#", address: "77 North Ave, Atlanta, GA", languages: ["es","en"], categories: ["salud"], pro_bono: true, wait_days: 1, zip: "30332" },
+        { id: 2, name: "Defensa Comunitaria ATL", phone: "(404) 555-0142", website: "#", address: "45 Ponce De Leon Ave, Atlanta, GA", languages: ["es"], categories: ["defensa"], pro_bono: false, wait_days: 2, zip: "30308" }
       ];
       const MOCK_AID = [
         { id: "a1", name: { es: "Banco de Alimentos Midtown", en: "Midtown Food Bank" }, type: { es: "Banco de alimentos", en: "Food bank" }, address: "101 Main St, Atlanta, GA", phone: "(404) 555-0111", zip: "30308" },
-        { id: "a2", name: { es: "Clases ESL Clarkston", en: "Clarkston ESL Classes" }, type: { es: "Clases de inglés", en: "ESL classes" }, address: "22 Church St, Clarkston, GA", phone: "(404) 555-0112", zip: "30021" },
-        { id: "a3", name: { es: "Refugio Peachtree", en: "Peachtree Shelter" }, type: { es: "Refugio", en: "Shelter" }, address: "400 Peachtree St, Atlanta, GA", phone: "(404) 555-0113", zip: "30303" },
+        { id: "a2", name: { es: "Clases ESL Clarkston", en: "Clarkston ESL Classes" }, type: { es: "Clases de inglés", en: "ESL classes" }, address: "22 Church St, Clarkston, GA", phone: "(404) 555-0112", zip: "30021" }
       ];
       const MOCK_VIDEOS_EDU = [
         { id: "edu1", title: { es: "Cómo inscribir a tus hijos en la escuela", en: "How to enroll your kids in school" }, duration: "1:40", captions: true, thumbnail: "https://images.unsplash.com/photo-1523246191913-1e7edb1f1a78?q=80&w=1200&auto=format&fit=crop", topic: "escuela" },
-        { id: "edu2", title: { es: "Tus derechos laborales básicos", en: "Your basic labor rights" }, duration: "1:55", captions: true, thumbnail: "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200&auto=format&fit=crop", topic: "trabajo" },
-        { id: "edu3", title: { es: "Clínicas de salud comunitarias", en: "Community health clinics" }, duration: "1:25", captions: true, thumbnail: "https://images.unsplash.com/photo-1519494080410-f9aa76cb4283?q=80&w=1200&auto=format&fit=crop", topic: "salud" },
-        { id: "edu4", title: { es: "Tus opciones de vivienda", en: "Your housing options" }, duration: "1:35", captions: true, thumbnail: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1200&auto=format&fit=crop", topic: "vivienda" },
+        { id: "edu2", title: { es: "Tus derechos laborales básicos", en: "Your basic labor rights" }, duration: "1:55", captions: true, thumbnail: "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200&auto=format&fit=crop", topic: "trabajo" }
       ];
 
-      // Utility: inline SVG data URL (final fallback)
+      // robust image w/ fallbacks (fixes your “missing image” case)
       const svgToDataUrl = (svg) => `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
       const MUTUAL_SHELVES_SVG = svgToDataUrl(`
         <svg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'>
@@ -193,7 +188,7 @@
         );
       }
 
-      // Atoms
+      // small UI atoms
       const Badge = ({ children }) => (
         <span className="inline-flex items-center rounded-full border border-slate-300 px-2 py-0.5 text-xs text-slate-600">{children}</span>
       );
@@ -218,7 +213,7 @@
         <a href={href} onClick={onClick} className={variant === "primary" ? "inline-flex items-center justify-center rounded-xl bg-emerald-700 px-4 py-2 text-white font-medium hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-400" : "inline-flex items-center justify-center rounded-xl border border-slate-300 px-4 py-2 text-slate-800 font-medium hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-300"}>{children}</a>
       );
 
-      // Chat (UI shell)
+      // Chat UI shell (no backend)
       function ChatWidget({ open, onClose }) {
         const { lang } = useI18n();
         const t = safeCopy(lang).labels;
@@ -234,9 +229,9 @@
           const val = input.trim(); if (!val) return; setInput("");
           setMessages((m) => [...m, { role: "user", text: val }]);
           const reply = lang === 'es'
-            ? "Entendido. Esto es educativo, no asesoría legal. Para ayuda local, usa Recursos Legales Cercanos o dime tu código postal."
-            : "Got it. This is educational, not legal advice. For local help, try Legal Resources Nearby or tell me your ZIP code.";
-          setTimeout(() => setMessages((m) => [...m, { role: "assistant", text: reply }]), 300);
+            ? "Entendido. Esto es educativo, no asesoría legal. Para ayuda local, use Recursos Legales Cercanos o dígame su código postal."
+            : "Got it. This is educational, not legal advice. For local help, try Legal Resources Nearby or tell me your ZIP.";
+          setTimeout(() => setMessages((m) => [...m, { role: "assistant", text: reply }]), 250);
         };
         return (
           <div className="fixed bottom-4 right-4 z-50 w-[min(100vw,380px)]">
@@ -289,7 +284,7 @@
               </div>
               <nav className="ml-6 hidden sm:flex items-center gap-4 text-sm text-slate-700">
                 <a href="#kyr" className="hover:text-slate-900">{t.nav.derechos}</a>
-                <!-- UPDATED: go to /finder.html -->
+                {/* updated: link to separate finder page */}
                 <a href="/finder.html" className="hover:text-slate-900">{t.nav.buscador}</a>
                 <a href="#mutual" className="hover:text-slate-900">{t.nav.red}</a>
                 <a href="#edu" className="hover:text-slate-900">{t.nav.edu}</a>
@@ -318,7 +313,7 @@
                   <p className="mt-3 text-slate-700 max-w-prose">{t.hero.body}</p>
                   <div className="mt-5 flex flex-wrap gap-3">
                     <CTAButton href="#kyr">{t.hero.ctaPrimary}</CTAButton>
-                    <!-- UPDATED: go to /finder.html -->
+                    {/* updated: link to separate finder page */}
                     <CTAButton href="/finder.html" variant="secondary">{t.hero.ctaSecondary}</CTAButton>
                   </div>
                   <p className="mt-3 text-xs text-slate-500">{t.hero.disclaimer}</p>
@@ -348,13 +343,12 @@
           { id: "kyr", title: s.kyrTitle, desc: d.kyr, img: "https://images.unsplash.com/photo-1461532257246-777de18cd58b?q=80&w=1200&auto=format&fit=crop" },
           { id: "finder", title: s.finderTitle, desc: d.finder, img: "https://images.unsplash.com/photo-1521791055366-0d553872125f?q=80&w=1200&auto=format&fit=crop" },
           { id: "mutual", title: s.mutualTitle, desc: d.mutual, img: "" },
-          { id: "edu", title: s.eduTitle, desc: d.edu, img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1200&auto=format&fit=crop" },
+          { id: "edu", title: s.eduTitle, desc: d.edu, img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1200&auto=format&fit=crop" }
         ];
         return (
           <div className="mx-auto max-w-6xl px-4 -mt-2">
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {pillars.map((p) => {
-                // UPDATED: the finder card links to /finder.html; others use in-page anchors
                 const href = p.id === "finder" ? "/finder.html" : `#${p.id}`;
                 return (
                   <a key={p.id} href={href} className="group block">
@@ -366,7 +360,7 @@
                               "https://images.unsplash.com/photo-1604909053191-8a9d70e5bc24?q=80&w=1200&auto=format&fit=crop",
                               "https://images.unsplash.com/photo-1506617420156-8e4536971650?q=80&w=1200&auto=format&fit=crop",
                               "https://upload.wikimedia.org/wikipedia/commons/4/4b/Food_pantry_shelves.jpg",
-                              MUTUAL_SHELVES_SVG,
+                              MUTUAL_SHELVES_SVG
                             ]}
                             className="w-full h-40 sm:h-36 object-cover"
                             alt="Food pantry shelves"
@@ -389,7 +383,7 @@
         );
       }
 
-      // KYR
+      // Simple demo sections (home)
       function VideoCard({ v }) {
         const { lang } = useI18n(); const t = safeCopy(lang);
         return (
@@ -407,17 +401,10 @@
         const { lang } = useI18n(); const t = safeCopy(lang);
         return (
           <Section id="kyr" title={t.sections.kyrTitle} subtitle={t.sections.kyrSub}>
-            <div className="mb-4 grid gap-3 sm:grid-cols-3">
-              <Card><div className="p-4"><h3 className="font-medium text-slate-900">{lang === 'es' ? 'Qué hacer ahora' : 'What to do now'}</h3><ol className="mt-2 list-decimal pl-5 text-sm text-slate-700 space-y-1"><li>{lang === 'es' ? 'Mantén la calma y guarda silencio. Pide un abogado.' : 'Stay calm and remain silent. Ask for a lawyer.'}</li><li>{lang === 'es' ? 'No firmes nada sin asesoría legal.' : 'Do not sign anything without legal counsel.'}</li><li>{lang === 'es' ? 'Ten lista tu tarjeta de derechos.' : 'Keep your rights card handy.'}</li></ol><div className="mt-3 flex flex-wrap gap-2"><CTAButton href="#"> {lang === 'es' ? 'Tarjeta (PDF)' : 'Rights card (PDF)'} </CTAButton><CTAButton href="#" variant="secondary">{lang === 'es' ? 'Guía 1 página' : '1-page guide'}</CTAButton></div></div></Card>
-              <Card><div className="p-4"><h3 className="font-medium text-slate-900">{lang === 'es' ? 'Contactos útiles' : 'Useful contacts'}</h3><ul className="mt-2 text-sm text-slate-700 space-y-1"><li>{lang === 'es' ? 'Abogado/a:' : 'Lawyer:'} <span className="font-medium">(404) 555-0101</span></li><li>{lang === 'es' ? 'Familiar de confianza' : 'Trusted family contact'}</li><li>{lang === 'es' ? 'Organización local' : 'Local organization'}</li></ul></div></Card>
-              <Card><div className="p-4"><h3 className="font-medium text-slate-900">{lang === 'es' ? 'Descargo' : 'Disclaimer'}</h3><p className="mt-2 text-sm text-slate-700">{lang === 'es' ? 'Esta información es educativa y no reemplaza asesoría legal. Consulta con un profesional antes de tomar decisiones.' : 'This information is educational and does not replace legal advice. Consult a professional before making decisions.'}</p></div></Card>
-            </div>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{MOCK_VIDEOS_KYR.map((v) => <VideoCard key={v.id} v={v} />)}</div>
           </Section>
         );
       }
-
-      // Finder
       function FinderSection() {
         const { lang } = useI18n(); const t = safeCopy(lang);
         const [zip, setZip] = useState(""); const [cat, setCat] = useState(null); const [proBonoOnly, setProBonoOnly] = useState(false);
@@ -434,11 +421,9 @@
                 <div className="lg:col-span-2 space-y-3">
                   {results.length === 0 ? (
                     <Card><div className="p-4 text-sm text-slate-600">{t.labels.noResults}</div></Card>
-                  ) : (
-                    results.map((r) => (
-                      <Card key={r.id}><div className="p-4 sm:p-5"><div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2"><div><h4 className="font-semibold text-slate-900">{r.name}</h4><p className="text-sm text-slate-600">{r.address}</p><div className="mt-2 flex flex-wrap gap-2">{r.categories.map((c) => <Badge key={c}>{CATEGORY_LABELS[(SUPPORTED_LANGS.includes(lang) ? lang : 'es')][c] || c}</Badge>)}{r.pro_bono ? <Badge>Pro bono</Badge> : null}<Badge>Es/En</Badge><Badge>{r.wait_days} {lang === 'es' ? 'días espera' : 'days wait'}</Badge></div></div><div className="flex gap-2"><CTAButton href={`tel:${r.phone}`}>{t.labels.call}</CTAButton><CTAButton href={r.website} variant="secondary">{t.labels.website}</CTAButton></div></div></div></Card>
-                    ))
-                  )}
+                  ) : results.map((r) => (
+                    <Card key={r.id}><div className="p-4 sm:p-5"><div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2"><div><h4 className="font-semibold text-slate-900">{r.name}</h4><p className="text-sm text-slate-600">{r.address}</p><div className="mt-2 flex flex-wrap gap-2">{r.categories.map((c) => <Badge key={c}>{CATEGORY_LABELS[(SUPPORTED_LANGS.includes(lang) ? lang : 'es')][c] || c}</Badge>)}{r.pro_bono ? <Badge>Pro bono</Badge> : null}<Badge>Es/En</Badge></div></div><div className="flex gap-2"><CTAButton href={`tel:${r.phone}`}>{t.labels.call}</CTAButton><CTAButton href={r.website} variant="secondary">{t.labels.website}</CTAButton></div></div></div></Card>
+                  ))}
                 </div>
                 <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
                   <div className="aspect-[4/3] w-full rounded-lg bg-[linear-gradient(45deg,#e2e8f0,#cbd5e1)] flex items-center justify-center text-slate-600 text-sm">{t.labels.mapPlaceholder}</div>
@@ -449,8 +434,6 @@
           </Section>
         );
       }
-
-      // Mutual Aid
       function MutualAidSection() {
         const { lang } = useI18n(); const t = safeCopy(lang);
         const [zip, setZip] = useState("");
@@ -464,7 +447,7 @@
                     "https://images.unsplash.com/photo-1604909053191-8a9d70e5bc24?q=80&w=1200&auto=format&fit=crop",
                     "https://images.unsplash.com/photo-1506617420156-8e4536971650?q=80&w=1200&auto=format&fit=crop",
                     "https://upload.wikimedia.org/wikipedia/commons/4/4b/Food_pantry_shelves.jpg",
-                    MUTUAL_SHELVES_SVG,
+                    MUTUAL_SHELVES_SVG
                   ]}
                   className="aspect-[16/10] w-full object-cover"
                   alt="Food pantry shelves"
@@ -481,17 +464,13 @@
           </Section>
         );
       }
-
-      // Education
       function EducationalSection() {
         const { lang } = useI18n(); const t = safeCopy(lang);
         const topics = [
           { id: 'trabajo', label: lang === 'es' ? 'Trabajo' : 'Work' },
           { id: 'salud', label: lang === 'es' ? 'Salud' : 'Health' },
           { id: 'escuela', label: lang === 'es' ? 'Escuela' : 'School' },
-          { id: 'vivienda', label: lang === 'es' ? 'Vivienda' : 'Housing' },
-          { id: 'finanzas', label: lang === 'es' ? 'Finanzas' : 'Finance' },
-          { id: 'seguridad', label: lang === 'es' ? 'Seguridad' : 'Safety' },
+          { id: 'vivienda', label: lang === 'es' ? 'Vivienda' : 'Housing' }
         ];
         const [active, setActive] = useState('trabajo');
         const vids = useMemo(() => MOCK_VIDEOS_EDU.filter(v => v.topic === active), [active]);
@@ -500,17 +479,14 @@
             <div className="flex flex-wrap gap-2 mb-4">{topics.map(tk => <Pill key={tk.id} active={active === tk.id} onClick={() => setActive(tk.id)}>{tk.label}</Pill>)}</div>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {vids.length === 0 ? (
-                <Card><div className="p-4 text-sm text-slate-600">{lang === 'es' ? 'No hay vídeos en este tema (demo).' : 'No videos for this topic (demo).'}</div></Card>
-              ) : (
-                vids.map(v => <VideoCard key={v.id} v={v} />)
-              )}
+                <Card><div className="p-4 text-sm text-slate-600">{lang === 'es' ? 'No hay videos en este tema (demo).' : 'No videos for this topic (demo).'}</div></Card>
+              ) : vids.map(v => <VideoCard key={v.id} v={v} />)}
             </div>
             <div className="mt-6"><Card><div className="p-4 sm:p-5"><h4 className="font-semibold text-slate-900">{t.labels.downloads}</h4><p className="mt-1 text-sm text-slate-700">{lang === 'es' ? 'Listas de verificación y glosarios sencillos.' : 'Simple checklists and glossaries.'}</p><div className="mt-3 flex flex-wrap gap-2"><CTAButton href="#">{t.labels.checklist}</CTAButton><CTAButton href="#" variant="secondary">{t.labels.glossary}</CTAButton></div></div></Card></div>
           </Section>
         );
       }
 
-      // Footer
       function Footer() {
         const { lang } = useI18n(); const t = safeCopy(lang);
         return (
@@ -520,7 +496,7 @@
                 <p>© {new Date().getFullYear()} {t.brand}. {lang === 'es' ? 'Información educativa; no es asesoría legal.' : 'Educational information; not legal advice.'}</p>
                 <div className="flex gap-4">
                   <a className="hover:text-slate-900" href="#kyr">{t.nav.derechos}</a>
-                  <!-- UPDATED: go to /finder.html -->
+                  {/* updated: link to separate finder page */}
                   <a className="hover:text-slate-900" href="/finder.html">{t.nav.buscador}</a>
                   <a className="hover:text-slate-900" href="#mutual">{t.nav.red}</a>
                   <a className="hover:text-slate-900" href="#edu">{t.nav.edu}</a>
@@ -531,7 +507,6 @@
         );
       }
 
-      // App
       function App() {
         const [lang, setLang] = useState("es");
         const [chatOpen, setChatOpen] = useState(false);
@@ -553,7 +528,6 @@
         );
       }
 
-      // Mount
       const root = ReactDOM.createRoot(document.getElementById("root"));
       root.render(<App />);
     </script>
