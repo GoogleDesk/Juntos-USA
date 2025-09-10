@@ -1,216 +1,215 @@
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ApoyoYA — Legal Resources Nearby</title>
+    <title>Immigrant Support — Legal Resources Nearby</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = { theme: { extend: {} }, corePlugins: { preflight: true } };
     </script>
-    <style>
-      html, body, #app { height: 100%; }
-      body { background: #fff; color: #0f172a; }
-    </style>
+    <style>html,body{height:100%}body{background:#fff;color:#0f172a}</style>
   </head>
-  <body>
-    <div id="app" class="min-h-screen flex flex-col">
-      <!-- Header (solid) -->
-      <header class="border-b border-slate-200 bg-white sticky top-0 z-40 shadow-md">
-        <div class="mx-auto max-w-6xl px-4 h-14 flex items-center gap-6">
-          <a href="/" class="flex items-center gap-2">
-            <div class="h-8 w-8 rounded-xl bg-emerald-700"></div>
-            <span class="font-semibold text-slate-900">Apoyo a Inmigrantes</span>
-          </a>
-          <nav class="hidden sm:flex items-center gap-4 text-sm font-medium text-slate-800">
-            <a href="/" class="hover:text-emerald-700">Home</a>
-            <a href="/finder.html" class="hover:text-emerald-700">Legal Resources Nearby</a>
-          </nav>
-          <button id="lang-toggle" class="ml-auto inline-flex items-center gap-2 rounded-lg bg-slate-100 px-3 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-200 border border-slate-300 shadow-sm">
-            Switch to Spanish
-          </button>
-        </div>
-      </header>
+  <body class="min-h-screen bg-white text-slate-900">
+    <header class="border-b border-slate-200 bg-white sticky top-0 z-40 shadow-md">
+      <div class="mx-auto max-w-6xl px-4 h-14 flex items-center gap-6">
+        <a href="index.html" class="flex items-center gap-2">
+          <div class="h-8 w-8 rounded-xl bg-emerald-700"></div>
+          <span id="brand" class="font-semibold text-slate-900">Immigrant Support</span>
+        </a>
+        <nav class="hidden sm:flex items-center gap-4 text-sm font-medium text-slate-800">
+          <!-- HOME LINK REMOVED PER REQUEST -->
+          <a id="nav-rights" href="index.html#kyr" class="hover:text-emerald-700">Know Your Rights</a>
+          <a id="nav-finder" href="finder.html" class="hover:text-emerald-700">Legal Resources Nearby</a>
+          <a id="nav-mutual" href="index.html#mutual" class="hover:text-emerald-700">Mutual Aid Nearby</a>
+          <a id="nav-edu" href="index.html#edu" class="hover:text-emerald-700">Education Hub</a>
+        </nav>
+        <button id="toggle" class="ml-auto inline-flex items-center gap-2 rounded-lg bg-slate-100 px-3 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-200 border border-slate-300 shadow-sm" aria-label="Toggle language">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M2 12h20"></path>
+            <path d="M12 2a15.3 15.3 0 0 1 0 20"></path>
+          </svg>
+          <span id="toggle-text">Switch to Spanish</span>
+        </button>
+      </div>
+    </header>
 
-      <!-- Content -->
-      <main class="flex-1">
-        <section class="py-8">
-          <div class="mx-auto max-w-6xl px-4">
-            <h1 id="title" class="text-2xl sm:text-3xl font-semibold text-slate-900">Legal Resources Nearby</h1>
-            <p id="subtitle" class="mt-1 text-slate-600 max-w-2xl">Find trustworthy legal help by area and category.</p>
+    <main class="mx-auto max-w-6xl px-4 py-6">
+      <h1 id="title" class="text-2xl sm:text-3xl font-semibold text-slate-900 mb-2">Legal Resources Nearby</h1>
+      <p id="subtitle" class="text-slate-600 mb-4">Find trustworthy legal help by area and category.</p>
 
-            <div class="mt-5 rounded-2xl border border-slate-200 bg-white p-4 sm:p-5">
-              <div class="flex flex-col sm:flex-row gap-3 sm:items-end">
-                <div class="flex-1">
-                  <label id="lbl-zip" class="text-sm text-slate-700">ZIP code</label>
-                  <input id="zip" inputmode="numeric" placeholder="30303" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400" />
-                </div>
-                <div class="flex-1">
-                  <label id="lbl-cat" class="text-sm text-slate-700">Category</label>
-                  <div id="pills" class="mt-1 flex flex-wrap gap-2"></div>
-                </div>
-                <div class="flex items-center gap-2">
-                  <input id="pb" type="checkbox" class="h-4 w-4 rounded border-slate-300" />
-                  <label id="lbl-pb" for="pb" class="text-sm text-slate-700">Pro bono only</label>
-                </div>
-              </div>
-
-              <div class="mt-5 grid gap-4 lg:grid-cols-3">
-                <div id="results" class="lg:col-span-2 space-y-3"></div>
-                <div class="rounded-xl border border-slate-200 bg-slate-50 p-3">
-                  <div id="mapph" class="aspect-[4/3] w-full rounded-lg bg-[linear-gradient(45deg,#e2e8f0,#cbd5e1)] flex items-center justify-center text-slate-600 text-sm">Map placeholder</div>
-                  <p id="mapnote" class="mt-2 text-xs text-slate-600">Note: this map is a placeholder.</p>
-                </div>
-              </div>
-            </div>
+      <div class="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5">
+        <div class="flex flex-col sm:flex-row gap-3 sm:items-end">
+          <div class="flex-1">
+            <label id="zip-label" class="text-sm text-slate-700">ZIP code</label>
+            <input id="zip" inputmode="numeric" placeholder="30303" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400">
           </div>
-        </section>
-      </main>
-
-      <footer class="border-t border-slate-200 bg-white shadow-inner">
-        <div class="mx-auto max-w-6xl px-4 py-6 text-sm text-slate-600 flex justify-between items-center">
-          <p>© <span id="year"></span> Apoyo a Inmigrantes</p>
-          <a href="/" class="font-semibold text-slate-800 hover:text-emerald-700" id="home-link">Home</a>
+          <div class="flex-1">
+            <label id="cat-label" class="text-sm text-slate-700">Category</label>
+            <div id="cat-pills" class="mt-1 flex flex-wrap gap-2"></div>
+          </div>
+          <div class="flex items-center gap-2">
+            <input id="probono" type="checkbox" class="h-4 w-4 rounded border-slate-300">
+            <label id="pb-label" for="probono" class="text-sm text-slate-700">Pro bono only</label>
+          </div>
         </div>
-      </footer>
-    </div>
+
+        <div class="mt-5 grid gap-4 lg:grid-cols-3">
+          <div id="results" class="lg:col-span-2 space-y-3"></div>
+          <div class="rounded-xl border border-slate-200 bg-slate-50 p-3">
+            <div id="map-ph" class="aspect-[4/3] w-full rounded-lg bg-[linear-gradient(45deg,#e2e8f0,#cbd5e1)] flex items-center justify-center text-slate-600 text-sm">Map (placeholder)</div>
+            <p id="map-note" class="mt-2 text-xs text-slate-600">Note: this map is a placeholder.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="border-t border-slate-200 bg-white shadow-inner">
+      <div class="mx-auto max-w-6xl px-4 py-6 text-sm text-slate-600">
+        <p id="footnote">© <span id="year"></span> Immigrant Support. Educational information; not legal advice.</p>
+      </div>
+    </footer>
 
     <script>
       const COPY = {
-        en: {
-          title: "Legal Resources Nearby",
-          subtitle: "Find trustworthy legal help by area and category.",
-          home: "Home",
-          toggle: "Switch to Spanish",
-          zipcode: "ZIP code",
-          category: "Category",
-          proBonoOnly: "Pro bono only",
-          mapNote: "Note: this map is a placeholder.",
-          mapPH: "Map placeholder",
-          noResults: "No results. Try another category or expand the area.",
-          catLabels: { asilo: "Asylum", defensa: "Removal defense", trabajo: "Work", naturalizacion: "Naturalization", familia: "Family", victimas: "Victims" }
-        },
         es: {
-          title: "Recursos Legales Cercanos",
-          subtitle: "Encuentre ayuda legal confiable por zona y categoría.",
-          home: "Inicio",
-          toggle: "Cambiar a inglés",
-          zipcode: "Código postal",
-          category: "Categoría",
-          proBonoOnly: "Solo pro bono",
-          mapNote: "Nota: este mapa es un ejemplo.",
-          mapPH: "Mapa (marcador de posición)",
-          noResults: "No hay resultados. Pruebe otra categoría o amplíe el área.",
-          catLabels: { asilo: "Asilo", defensa: "Defensa contra deportación", trabajo: "Trabajo", naturalizacion: "Naturalización", familia: "Familia", victimas: "Víctimas" }
+          brand: "Apoyo a Inmigrantes",
+          nav: { derechos: "Conozca Sus Derechos", buscador: "Recursos Legales Cercanos", red: "Apoyo Mutuo Cercano", edu: "Centro Educativo" },
+          finder: { title: "Recursos Legales Cercanos", sub: "Encuentre ayuda legal confiable por zona y categoría." },
+          labels: {
+            langToggle: "Cambiar a inglés", langToggleAlt: "Cambiar a español",
+            zipcode: "Código postal", category: "Categoría", proBonoOnly: "Solo pro bono",
+            noResults: "No hay resultados. Pruebe otra categoría o amplíe el área.",
+            mapNote: "Nota: este mapa es un ejemplo.", mapPH: "Mapa (ejemplo)",
+            call: "Llamar", website: "Sitio web"
+          },
+          cats: { asilo: "Asilo", daca: "DACA", defensa: "Defensa contra deportación", trabajo: "Trabajo", vivienda: "Vivienda", salud: "Salud" },
+          foot: "Información educativa; no es asesoría legal."
+        },
+        en: {
+          brand: "Immigrant Support",
+          nav: { derechos: "Know Your Rights", buscador: "Legal Resources Nearby", red: "Mutual Aid Nearby", edu: "Education Hub" },
+          finder: { title: "Legal Resources Nearby", sub: "Find trustworthy legal help by area and category." },
+          labels: {
+            langToggle: "Switch to Spanish", langToggleAlt: "Switch to English",
+            zipcode: "ZIP code", category: "Category", proBonoOnly: "Pro bono only",
+            noResults: "No results. Try another category or expand the area.",
+            mapNote: "Note: this map is a placeholder.", mapPH: "Map (placeholder)",
+            call: "Call", website: "Website"
+          },
+          cats: { asilo: "Asylum", daca: "DACA", defensa: "Removal defense", trabajo: "Work", vivienda: "Housing", salud: "Health" },
+          foot: "Educational information; not legal advice."
         }
       };
-      const CATS = ["asilo","defensa","trabajo","naturalizacion","familia","victimas"];
-      let lang = "en";
 
-      const $ = (id) => document.getElementById(id);
-      const resultsEl = $("results");
-      const pillsEl = $("pills");
-      const zipEl = $("zip");
-      const pbEl = $("pb");
-
-      const state = { cat: null, zip: "", pb: false, data: [] };
-
-      function renderStrings() {
-        const t = COPY[lang];
-        $("title").textContent = t.title;
-        document.title = "ApoyoYA — " + t.title;
-        $("subtitle").textContent = t.subtitle;
-        $("home-link").textContent = t.home;
-        $("lang-toggle").textContent = t.toggle;
-        $("lbl-zip").textContent = t.zipcode;
-        $("lbl-cat").textContent = t.category;
-        $("lbl-pb").textContent = t.proBonoOnly;
-        $("mapph").textContent = t.mapPH;
-        $("mapnote").textContent = t.mapNote;
+      // Persisted language
+      function getLang(){
+        const q = new URLSearchParams(location.search).get('lang');
+        const ls = localStorage.getItem('juntos_lang');
+        const x = (q === 'es' || q === 'en') ? q : (ls || 'en');
+        localStorage.setItem('juntos_lang', x);
+        return x;
+      }
+      function setLang(next){
+        const sp = new URLSearchParams(location.search); sp.set('lang', next);
+        localStorage.setItem('juntos_lang', next);
+        location.search = sp.toString();
       }
 
-      function renderPills() {
-        const t = COPY[lang];
-        pillsEl.innerHTML = "";
-        CATS.forEach((id) => {
-          const btn = document.createElement("button");
-          btn.className = "rounded-full px-3 py-1 text-sm border transition " + (state.cat === id ? "bg-emerald-600 text-white border-emerald-600" : "bg-white text-slate-700 border-slate-300 hover:border-slate-400");
-          btn.textContent = t.catLabels[id];
-          btn.onclick = () => { state.cat = (state.cat === id ? null : id); renderPills(); renderResults(); };
-          pillsEl.appendChild(btn);
+      const state = { lang: getLang(), data: [], cat: null, zip: "", pb: false };
+
+      function t(){ return COPY[state.lang]; }
+      function isES(){ return state.lang === 'es'; }
+
+      function syncHeader(){
+        document.getElementById('brand').textContent = t().brand;
+        document.getElementById('nav-rights').textContent = t().nav.derechos;
+        document.getElementById('nav-finder').textContent = t().nav.buscador;
+        document.getElementById('nav-mutual').textContent = t().nav.red;
+        document.getElementById('nav-edu').textContent = t().nav.edu;
+
+        // Ensure links preserve ?lang
+        for (const a of document.querySelectorAll('nav a')){
+          const u = new URL(a.getAttribute('href'), location.href);
+          u.searchParams.set('lang', state.lang);
+          a.setAttribute('href', u.pathname + '?' + u.searchParams.toString());
+        }
+
+        const text = isES() ? COPY.en.labels.langToggleAlt : COPY.es.labels.langToggleAlt;
+        document.getElementById('toggle-text').textContent = text;
+        document.getElementById('toggle').setAttribute('aria-label', text);
+      }
+
+      function syncStatic(){
+        document.getElementById('title').textContent = t().finder.title;
+        document.getElementById('subtitle').textContent = t().finder.sub;
+        document.getElementById('zip-label').textContent = t().labels.zipcode;
+        document.getElementById('cat-label').textContent = t().labels.category;
+        document.getElementById('pb-label').textContent = t().labels.proBonoOnly;
+        document.getElementById('map-ph').textContent = t().labels.mapPH;
+        document.getElementById('map-note').textContent = t().labels.mapNote;
+        document.getElementById('footnote').innerHTML = `© <span id="year"></span> ${t().brand}. ${t().foot}`;
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Build category pills
+        const cats = t().cats;
+        const holder = document.getElementById('cat-pills'); holder.innerHTML = '';
+        Object.keys(cats).forEach((id) => {
+          const btn = document.createElement('button');
+          btn.className = "rounded-full px-3 py-1 text-sm border transition bg-white text-slate-700 border-slate-300 hover:border-slate-400";
+          btn.textContent = cats[id];
+          btn.onclick = () => { state.cat = (state.cat === id) ? null : id; render(); };
+          holder.appendChild(btn);
         });
       }
 
-      function matches(r) {
-        const byZip = state.zip ? String(r.zip || "").startsWith(state.zip) : true;
-        const byCat = state.cat ? (r.categories || []).includes(state.cat) : true;
-        const byPb = state.pb ? !!r.pro_bono : true;
-        return byZip && byCat && byPb;
-      }
-
-      function card(resource) {
-        const t = COPY[lang];
-        const cats = (resource.categories || []).map(c => t.catLabels[c] || c).join(", ");
-        const div = document.createElement("div");
-        div.className = "rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden";
-        div.innerHTML = `
+      function card(org){
+        const cats = (org.categories || []).map(c => t().cats[c] || c);
+        return `<div class="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
           <div class="p-4 sm:p-5">
             <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
               <div>
-                <h4 class="font-semibold text-slate-900">${resource.name}</h4>
-                <p class="text-sm text-slate-600">${resource.address || ""}</p>
-                <div class="mt-2 text-xs text-slate-600">${cats}${resource.pro_bono ? " • Pro bono" : ""}</div>
+                <h4 class="font-semibold text-slate-900">${org.name || ""}</h4>
+                <p class="text-sm text-slate-600">${org.address || ""}</p>
+                <div class="mt-2 flex flex-wrap gap-2">
+                  ${cats.map(c => `<span class="inline-flex items-center rounded-full border border-slate-300 px-2 py-0.5 text-xs text-slate-600">${c}</span>`).join('')}
+                  ${org.pro_bono ? '<span class="inline-flex items-center rounded-full border border-slate-300 px-2 py-0.5 text-xs text-slate-600">Pro bono</span>' : ''}
+                </div>
               </div>
               <div class="flex gap-2">
-                ${resource.phone ? `<a class="inline-flex items-center justify-center rounded-xl bg-emerald-700 px-4 py-2 text-white font-medium hover:bg-emerald-800" href="tel:${resource.phone}">${lang==="es"?"Llamar":"Call"}</a>` : ""}
-                ${resource.website ? `<a class="inline-flex items-center justify-center rounded-xl border border-slate-300 px-4 py-2 text-slate-800 font-medium hover:bg-slate-50" href="${resource.website}" target="_blank" rel="noopener">Website</a>` : ""}
+                ${org.phone ? `<a href="tel:${org.phone}" class="inline-flex items-center justify-center rounded-xl bg-emerald-700 px-4 py-2 text-white font-medium hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-400">${t().labels.call}</a>` : ''}
+                ${org.website ? `<a href="${org.website}" target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-xl border border-slate-300 px-4 py-2 text-slate-800 font-medium hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-300">${t().labels.website}</a>` : ''}
               </div>
             </div>
-          </div>`;
-        return div;
+          </div>
+        </div>`;
       }
 
-      function renderResults() {
-        const t = COPY[lang];
-        const filtered = state.data.filter(matches);
-        resultsEl.innerHTML = "";
-        if (filtered.length === 0) {
-          const none = document.createElement("div");
-          none.className = "rounded-2xl border border-slate-200 bg-white p-4 text-sm text-slate-600";
-          none.textContent = t.noResults;
-          resultsEl.appendChild(none);
-          return;
-        }
-        filtered.forEach(r => resultsEl.appendChild(card(r)));
-      }
+      function render(){
+        // Sync header toggle text every render in case lang changed.
+        syncHeader();
 
-      async function loadData() {
-        try {
-          const res = await fetch("/data/resources.json", { cache: "no-store" });
-          const json = await res.json();
-          state.data = Array.isArray(json) ? json : [];
-          renderResults();
-        } catch (e) {
-          state.data = [];
-          renderResults();
-        }
-      }
+        const zip = document.getElementById('zip').value.trim();
+        const res = state.data.filter(r => (zip ? (r.zip || "").startsWith(zip) : true) && (state.cat ? (r.categories || []).includes(state.cat) : true) && (state.pb ? !!r.pro_bono : true));
 
-      // Events
-      zipEl.addEventListener("input", () => { state.zip = zipEl.value.trim(); renderResults(); });
-      pbEl.addEventListener("change", () => { state.pb = pbEl.checked; renderResults(); });
-      document.getElementById("lang-toggle").addEventListener("click", () => {
-        lang = (lang === "en" ? "es" : "en");
-        renderStrings();
-        renderPills();
-        renderResults();
-      });
+        const wrap = document.getElementById('results');
+        wrap.innerHTML = res.length ? res.map(card).join('') :
+          `<div class="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden"><div class="p-4 text-sm text-slate-600">${t().labels.noResults}</div></div>`;
+      }
 
       // Init
-      document.getElementById("year").textContent = new Date().getFullYear();
-      renderStrings();
-      renderPills();
-      loadData();
+      document.getElementById('toggle').addEventListener('click', () => setLang(isES() ? 'en' : 'es'));
+      document.getElementById('zip').addEventListener('input', render);
+      document.getElementById('probono').addEventListener('change', (e) => { state.pb = e.target.checked; render(); });
+
+      syncHeader(); syncStatic();
+
+      fetch('data/resources.json')
+        .then(r => r.json())
+        .then(j => { state.data = Array.isArray(j) ? j : []; render(); })
+        .catch(() => { state.data = []; render(); });
     </script>
   </body>
 </html>
