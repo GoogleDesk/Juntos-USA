@@ -74,9 +74,9 @@
             mapNote: "Nota: Este mapa es un ejemplo.",
             mapPlaceholder: "Mapa (banco de alimentos)",
             call: "Llamar", website: "Sitio web",
-            chatOpen: "Chat de ayuda (GPT‑5)", chatTitle: "Asistente (educativo)",
+            chatOpen: "Chat de ayuda (GPT-5)", chatTitle: "Asistente (educativo)",
             chatDisclaimer: "Respuestas educativas; no es asesoría legal.",
-            chatPlaceholder: "Escribe tu pregunta aquí…", chatSend: "Enviar", chatClose: "Cerrar", chatPoweredBy: "Impulsado por GPT‑5",
+            chatPlaceholder: "Escribe tu pregunta aquí…", chatSend: "Enviar", chatClose: "Cerrar", chatPoweredBy: "Impulsado por GPT-5",
             runTests: "Probar UI", testsPassing: "Pruebas OK", testsFailing: "Pruebas fallan", subtitles: "Subtítulos", play: "Reproducir",
             downloads: "Descargables", checklist: "Checklist (PDF)", glossary: "Glosario (PDF)",
           },
@@ -86,7 +86,7 @@
           nav: { derechos: "Know Your Rights", buscador: "Legal Resources Nearby", red: "Mutual Aid Nearby", edu: "Education Hub" },
           hero: {
             title: "Clear information and nearby help, in Spanish & English",
-            body: "Trusted resources to learn your rights, find legal help, locate mutual‑aid centers, and learn with short videos.",
+            body: "Trusted resources to learn your rights, find legal help, locate mutual-aid centers, and learn with short videos.",
             ctaPrimary: "View rights now",
             ctaSecondary: "Legal resources nearby",
             disclaimer: "This information is educational and not legal advice.",
@@ -117,9 +117,9 @@
             mapNote: "Note: This map is a placeholder.",
             mapPlaceholder: "Map (food bank theme)",
             call: "Call", website: "Website",
-            chatOpen: "Chat help (GPT‑5)", chatTitle: "Assistant (educational)",
+            chatOpen: "Chat help (GPT-5)", chatTitle: "Assistant (educational)",
             chatDisclaimer: "Educational responses; not legal advice.",
-            chatPlaceholder: "Type your question here…", chatSend: "Send", chatClose: "Close", chatPoweredBy: "Powered by GPT‑5",
+            chatPlaceholder: "Type your question here…", chatSend: "Send", chatClose: "Close", chatPoweredBy: "Powered by GPT-5",
             runTests: "Run UI checks", testsPassing: "Tests passing", testsFailing: "Tests failing", subtitles: "Captions", play: "Play",
             downloads: "Downloads", checklist: "Checklist (PDF)", glossary: "Glossary (PDF)",
           },
@@ -269,7 +269,7 @@
           <button onClick={onClick} className="fixed bottom-4 right-4 z-40 rounded-full shadow-lg bg-slate-900 text-white text-sm pl-4 pr-3 py-2 hover:bg-slate-800 flex items-center gap-2" aria-label={t.chatOpen}>
             <span className="inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse" />
             <span className="font-medium">{t.chatOpen}</span>
-            <span className="ml-1 inline-flex items-center rounded-full border border-emerald-500 text-emerald-200 bg-emerald-600/20 px-2 py-0.5 text-[10px]">GPT‑5</span>
+            <span className="ml-1 inline-flex items-center rounded-full border border-emerald-500 text-emerald-200 bg-emerald-600/20 px-2 py-0.5 text-[10px]">GPT-5</span>
           </button>
         );
       }
@@ -289,7 +289,8 @@
               </div>
               <nav className="ml-6 hidden sm:flex items-center gap-4 text-sm text-slate-700">
                 <a href="#kyr" className="hover:text-slate-900">{t.nav.derechos}</a>
-                <a href="#finder" className="hover:text-slate-900">{t.nav.buscador}</a>
+                <!-- UPDATED: go to /finder.html -->
+                <a href="/finder.html" className="hover:text-slate-900">{t.nav.buscador}</a>
                 <a href="#mutual" className="hover:text-slate-900">{t.nav.red}</a>
                 <a href="#edu" className="hover:text-slate-900">{t.nav.edu}</a>
               </nav>
@@ -317,7 +318,8 @@
                   <p className="mt-3 text-slate-700 max-w-prose">{t.hero.body}</p>
                   <div className="mt-5 flex flex-wrap gap-3">
                     <CTAButton href="#kyr">{t.hero.ctaPrimary}</CTAButton>
-                    <CTAButton href="#finder" variant="secondary">{t.hero.ctaSecondary}</CTAButton>
+                    <!-- UPDATED: go to /finder.html -->
+                    <CTAButton href="/finder.html" variant="secondary">{t.hero.ctaSecondary}</CTAButton>
                   </div>
                   <p className="mt-3 text-xs text-slate-500">{t.hero.disclaimer}</p>
                 </div>
@@ -351,33 +353,37 @@
         return (
           <div className="mx-auto max-w-6xl px-4 -mt-2">
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {pillars.map((p) => (
-                <a key={p.id} href={`#${p.id}`} className="group block">
-                  <Card>
-                    <div className="relative">
-                      {p.id === 'mutual' ? (
-                        <MultiSrcImg
-                          sources={[
-                            "https://images.unsplash.com/photo-1604909053191-8a9d70e5bc24?q=80&w=1200&auto=format&fit=crop",
-                            "https://images.unsplash.com/photo-1506617420156-8e4536971650?q=80&w=1200&auto=format&fit=crop",
-                            "https://upload.wikimedia.org/wikipedia/commons/4/4b/Food_pantry_shelves.jpg",
-                            MUTUAL_SHELVES_SVG,
-                          ]}
-                          className="w-full h-40 sm:h-36 object-cover"
-                          alt="Food pantry shelves"
-                        />
-                      ) : (
-                        <div className="w-full h-40 sm:h-36 bg-cover bg-center" style={{ backgroundImage: `url(${p.img})` }} aria-label={p.title} />
-                      )}
-                      <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-black/50 to-transparent" />
-                    </div>
-                    <div className="p-5">
-                      <h3 className="font-semibold text-slate-900 text-lg group-hover:underline">{p.title}</h3>
-                      <p className="mt-1 text-sm text-slate-600 min-h-[42px]">{p.desc}</p>
-                    </div>
-                  </Card>
-                </a>
-              ))}
+              {pillars.map((p) => {
+                // UPDATED: the finder card links to /finder.html; others use in-page anchors
+                const href = p.id === "finder" ? "/finder.html" : `#${p.id}`;
+                return (
+                  <a key={p.id} href={href} className="group block">
+                    <Card>
+                      <div className="relative">
+                        {p.id === 'mutual' ? (
+                          <MultiSrcImg
+                            sources={[
+                              "https://images.unsplash.com/photo-1604909053191-8a9d70e5bc24?q=80&w=1200&auto=format&fit=crop",
+                              "https://images.unsplash.com/photo-1506617420156-8e4536971650?q=80&w=1200&auto=format&fit=crop",
+                              "https://upload.wikimedia.org/wikipedia/commons/4/4b/Food_pantry_shelves.jpg",
+                              MUTUAL_SHELVES_SVG,
+                            ]}
+                            className="w-full h-40 sm:h-36 object-cover"
+                            alt="Food pantry shelves"
+                          />
+                        ) : (
+                          <div className="w-full h-40 sm:h-36 bg-cover bg-center" style={{ backgroundImage: `url(${p.img})` }} aria-label={p.title} />
+                        )}
+                        <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-black/50 to-transparent" />
+                      </div>
+                      <div className="p-5">
+                        <h3 className="font-semibold text-slate-900 text-lg group-hover:underline">{p.title}</h3>
+                        <p className="mt-1 text-sm text-slate-600 min-h-[42px]">{p.desc}</p>
+                      </div>
+                    </Card>
+                  </a>
+                );
+              })}
             </div>
           </div>
         );
@@ -402,7 +408,7 @@
         return (
           <Section id="kyr" title={t.sections.kyrTitle} subtitle={t.sections.kyrSub}>
             <div className="mb-4 grid gap-3 sm:grid-cols-3">
-              <Card><div className="p-4"><h3 className="font-medium text-slate-900">{lang === 'es' ? 'Qué hacer ahora' : 'What to do now'}</h3><ol className="mt-2 list-decimal pl-5 text-sm text-slate-700 space-y-1"><li>{lang === 'es' ? 'Mantén la calma y guarda silencio. Pide un abogado.' : 'Stay calm and remain silent. Ask for a lawyer.'}</li><li>{lang === 'es' ? 'No firmes nada sin asesoría legal.' : 'Do not sign anything without legal counsel.'}</li><li>{lang === 'es' ? 'Ten lista tu tarjeta de derechos.' : 'Keep your rights card handy.'}</li></ol><div className="mt-3 flex flex-wrap gap-2"><CTAButton href="#"> {lang === 'es' ? 'Tarjeta (PDF)' : 'Rights card (PDF)'} </CTAButton><CTAButton href="#" variant="secondary">{lang === 'es' ? 'Guía 1 página' : '1‑page guide'}</CTAButton></div></div></Card>
+              <Card><div className="p-4"><h3 className="font-medium text-slate-900">{lang === 'es' ? 'Qué hacer ahora' : 'What to do now'}</h3><ol className="mt-2 list-decimal pl-5 text-sm text-slate-700 space-y-1"><li>{lang === 'es' ? 'Mantén la calma y guarda silencio. Pide un abogado.' : 'Stay calm and remain silent. Ask for a lawyer.'}</li><li>{lang === 'es' ? 'No firmes nada sin asesoría legal.' : 'Do not sign anything without legal counsel.'}</li><li>{lang === 'es' ? 'Ten lista tu tarjeta de derechos.' : 'Keep your rights card handy.'}</li></ol><div className="mt-3 flex flex-wrap gap-2"><CTAButton href="#"> {lang === 'es' ? 'Tarjeta (PDF)' : 'Rights card (PDF)'} </CTAButton><CTAButton href="#" variant="secondary">{lang === 'es' ? 'Guía 1 página' : '1-page guide'}</CTAButton></div></div></Card>
               <Card><div className="p-4"><h3 className="font-medium text-slate-900">{lang === 'es' ? 'Contactos útiles' : 'Useful contacts'}</h3><ul className="mt-2 text-sm text-slate-700 space-y-1"><li>{lang === 'es' ? 'Abogado/a:' : 'Lawyer:'} <span className="font-medium">(404) 555-0101</span></li><li>{lang === 'es' ? 'Familiar de confianza' : 'Trusted family contact'}</li><li>{lang === 'es' ? 'Organización local' : 'Local organization'}</li></ul></div></Card>
               <Card><div className="p-4"><h3 className="font-medium text-slate-900">{lang === 'es' ? 'Descargo' : 'Disclaimer'}</h3><p className="mt-2 text-sm text-slate-700">{lang === 'es' ? 'Esta información es educativa y no reemplaza asesoría legal. Consulta con un profesional antes de tomar decisiones.' : 'This information is educational and does not replace legal advice. Consult a professional before making decisions.'}</p></div></Card>
             </div>
@@ -514,7 +520,8 @@
                 <p>© {new Date().getFullYear()} {t.brand}. {lang === 'es' ? 'Información educativa; no es asesoría legal.' : 'Educational information; not legal advice.'}</p>
                 <div className="flex gap-4">
                   <a className="hover:text-slate-900" href="#kyr">{t.nav.derechos}</a>
-                  <a className="hover:text-slate-900" href="#finder">{t.nav.buscador}</a>
+                  <!-- UPDATED: go to /finder.html -->
+                  <a className="hover:text-slate-900" href="/finder.html">{t.nav.buscador}</a>
                   <a className="hover:text-slate-900" href="#mutual">{t.nav.red}</a>
                   <a className="hover:text-slate-900" href="#edu">{t.nav.edu}</a>
                 </div>
