@@ -367,7 +367,7 @@
                 <Card><div className="p-4 text-sm text-slate-600">{lang === 'es' ? 'No hay videos en este tema (demo).' : 'No videos for this topic (demo).'}</div></Card>
               ) : vids.map(v => <VideoCard key={v.id} v={v} />)}
             </div>
-            <div className="mt-6"><Card><div className="p-4 sm:p-5"><h4 className="font-semibold text-slate-900">{t.labels.downloads}</h4><p className="mt-1 text-sm text-slate-700">{lang === 'es' ? 'Listas de verificación y glosarios sencillos.' : 'Simple checklists and glossaries.'}</p><div className="mt-3 flex flex-wrap gap-2"><CTAButton href="#">{t.labels.checklist}</CTAButton><CTAButton href="#" variant="secondary">{t.labels.glossary}</CTAButton></div></div></Card></div>
+            
           </Section>
         );
       }
@@ -448,8 +448,6 @@
           <LangCtx.Provider value={{ lang, setLang }}>
             <main className="min-h-screen bg-white text-slate-900">
               <Header />
-              <Hero />
-              <PillarCards />
               <KYRSection />
               <FinderSection />
               <MutualAidSection />
