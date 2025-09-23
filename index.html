@@ -163,7 +163,7 @@
       );
       const Section = ({ id, title, subtitle, children }) => (
         <section id={id} className="py-10 sm:py-12">
-          <div className="relative z-10 mx-auto max-w-6xl px-4">
+          <div className="mx-auto max-w-6xl px-4">
             <div className="mb-5 sm:mb-6">
               <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900">{title}</h2>
               {subtitle ? <p className="mt-1 text-slate-600 max-w-2xl">{subtitle}</p> : null}
@@ -186,7 +186,7 @@
           <header className="border-b border-slate-200 bg-white sticky top-0 z-40 shadow-md">
             <div className="mx-auto max-w-6xl px-4 h-14 flex items-center gap-6">
               <a href="/" className="flex items-center gap-2">
-                <img src="logo.png" alt="Apoyo a Inmigrantes logo" className="h-8 w-8" />
+                <div className="h-8 w-8 rounded-xl bg-emerald-700" />
                 <span className="font-semibold text-slate-900">{t.brand}</span>
               </a>
               <nav className="hidden sm:flex items-center gap-4 text-sm font-medium text-slate-800">
@@ -217,7 +217,7 @@
         const { lang } = useI18n();
         const t = safeCopy(lang);
         return (
-          <section className="bg-gradient-to-b from-emerald-100/70 to-white">
+          <section className="bg-gradient-to-b from-emerald-50 to-white">
             <div className="mx-auto max-w-6xl px-4 pt-6 pb-4 sm:pt-8 sm:pb-6">
               <div className="grid gap-6 sm:grid-cols-2 sm:items-center">
                 <div>
@@ -304,34 +304,86 @@
         );
       }
       
+      
+      // Sanitize non-JSON tokens in resources.json before JSON.parse
+      async function loadResources() {
+        const res = await fetch('./data/resources.json', { cache: 'no-store' });
+        const text = await res.text();
+        const cleaned = text
+          .replace(/mix\s*=\s*true/gi, 'true')
+          .replace(/lowCost\s*=\s*false/gi, 'false');
+        try { return JSON.parse(cleaned); } catch (e) { console.error('JSON parse error', e); return []; }
+      }
+
       function FinderSection() {
         const { lang } = useI18n(); const t = safeCopy(lang);
         const [allResources, setAll] = useState([]);
         const [zip, setZip] = useState(""); const [cat, setCat] = useState(null); const [pb, setPb] = useState(false);
+
         useEffect(() => {
           let alive = true;
-          fetch('/data/resources.cleaned.json', { cache: 'no-store' })
-            .then(r => r.json()).then(j => { if (alive) setAll(Array.isArray(j) ? j : []); })
+          loadResources()
+            .then(j => { if (alive) setAll(Array.isArray(j) ? j : []); })
             .catch(() => { if (alive) setAll([]); });
           return () => { alive = false; };
         }, []);
+
         const results = useMemo(() => allResources.filter(r => (zip ? String(r.zip || '').startsWith(zip) : true) && (cat ? (r.categories || []).includes(cat) : true) && (pb ? !!r.pro_bono : true)), [allResources, zip, cat, pb]);
+
         return (
           <Section id="finder" title={t.sections.finderTitle} subtitle={t.sections.finderSub}>
             <div className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5">
               <div className="flex flex-col sm:flex-row gap-3 sm:items-end">
-                <div className="flex-1"><label className="text-sm text-slate-700">{t.labels.zipcode}</label><input value={zip} onChange={(e) => setZip(e.target.value)} inputMode="numeric" placeholder="30303" className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400" /></div>
-                <div className="flex-1"><label className="text-sm text-slate-700">{t.labels.category}</label><div className="mt-1 flex flex-wrap gap-2">{CATEGORIES.map((id) => (<Pill key={id} active={cat === id} onClick={() => setCat(cat === id ? null : id)}>{CATEGORY_LABELS[(SUPPORTED_LANGS.includes(lang) ? lang : 'es')][id]}</Pill>))}</div></div>
-                <div className="flex items-center gap-2"><input id="pbHome" type="checkbox" checked={pb} onChange={(e) => setPb(e.target.checked)} className="h-4 w-4 rounded border-slate-300" /><label htmlFor="pbHome" className="text-sm text-slate-700">{t.labels.proBonoOnly}</label></div>
+                <div className="flex-1">
+                  <label className="text-sm text-slate-700">{t.labels.zipcode}</label>
+                  <input value={zip} onChange={(e) => setZip(e.target.value)} inputMode="numeric" placeholder="30303"
+                    className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400" />
+                </div>
+                <div className="flex-1">
+                  <label className="text-sm text-slate-700">{t.labels.category}</label>
+                  <div className="mt-1 flex flex-wrap gap-2">
+                    {CATEGORIES.map((id) => (
+                      <Pill key={id} active={cat === id} onClick={() => setCat(cat === id ? null : id)}>
+                        {CATEGORY_LABELS[(SUPPORTED_LANGS.includes(lang) ? lang : 'es')][id]}
+                      </Pill>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <input id="pbHome" type="checkbox" checked={pb} onChange={(e) => setPb(e.target.checked)} className="h-4 w-4 rounded border-slate-300" />
+                  <label htmlFor="pbHome" className="text-sm text-slate-700">{t.labels.proBonoOnly}</label>
+                </div>
               </div>
+
               <div className="mt-5 grid gap-4 lg:grid-cols-3">
                 <div className="lg:col-span-2 space-y-3">
                   {results.length === 0 ? (
                     <Card><div className="p-4 text-sm text-slate-600">{t.labels.noResults}</div></Card>
                   ) : results.map((r) => (
-                    <Card key={r.id}><div className="p-4 sm:p-5"><div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2"><div><h4 className="font-semibold text-slate-900">{r.name}</h4><p className="text-sm text-slate-600">{r.address}</p><div className="mt-2 flex flex-wrap gap-2">{(r.categories || []).map((c) => <Badge key={c}>{CATEGORY_LABELS[(SUPPORTED_LANGS.includes(lang) ? lang : 'es')][c] || c}</Badge>)}{r.pro_bono ? <Badge>Pro bono</Badge> : null}<Badge>{(r.languages || []).join('/') || 'Es/En'}</Badge></div></div><div className="flex gap-2"><CTAButton href={`tel:${r.phone}`}>{t.labels.call}</CTAButton><CTAButton href={r.website} variant="secondary">{t.labels.website}</CTAButton></div></div></div></Card>
+                    <Card key={r.id}>
+                      <div className="p-4 sm:p-5">
+                        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+                          <div>
+                            <h4 className="font-semibold text-slate-900">{r.name}</h4>
+                            <p className="text-sm text-slate-600">{r.address}</p>
+                            <div className="mt-2 flex flex-wrap gap-2">
+                              {(r.categories || []).map((c) => (
+                                <Badge key={c}>{CATEGORY_LABELS[(SUPPORTED_LANGS.includes(lang) ? lang : 'es')][c] || c}</Badge>
+                              ))}
+                              {r.pro_bono ? <Badge>Pro bono</Badge> : null}
+                              <Badge>{(r.languages || []).join('/') || 'Es/En'}</Badge>
+                            </div>
+                          </div>
+                          <div className="flex gap-2">
+                            {r.phone ? <CTAButton href={`tel:${r.phone}`}>{t.labels.call}</CTAButton> : null}
+                            {r.website ? <CTAButton href={r.website} variant="secondary">{t.labels.website}</CTAButton> : null}
+                          </div>
+                        </div>
+                      </div>
+                    </Card>
                   ))}
                 </div>
+
                 <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
                   <div className="aspect-[4/3] w-full rounded-lg bg-[linear-gradient(45deg,#e2e8f0,#cbd5e1)] flex items-center justify-center text-slate-600 text-sm">{t.labels.mapNote}</div>
                   <p className="mt-2 text-xs text-slate-600">{t.labels.mapNote}</p>
@@ -376,7 +428,7 @@ function MutualAidSection() {
                 <Card><div className="p-4 text-sm text-slate-600">{lang === 'es' ? 'No hay videos en este tema (demo).' : 'No videos for this topic (demo).'}</div></Card>
               ) : vids.map(v => <VideoCard key={v.id} v={v} />)}
             </div>
-            
+            <div className="mt-6"><Card><div className="p-4 sm:p-5"><h4 className="font-semibold text-slate-900">{t.labels.downloads}</h4><p className="mt-1 text-sm text-slate-700">{lang === 'es' ? 'Listas de verificación y glosarios sencillos.' : 'Simple checklists and glossaries.'}</p><div className="mt-3 flex flex-wrap gap-2"><CTAButton href="#">{t.labels.checklist}</CTAButton><CTAButton href="#" variant="secondary">{t.labels.glossary}</CTAButton></div></div></Card></div>
           </Section>
         );
       }
@@ -455,9 +507,10 @@ function MutualAidSection() {
         const [chatOpen, setChatOpen] = useState(false);
         return (
           <LangCtx.Provider value={{ lang, setLang }}>
-            <main className="relative min-h-screen bg-white text-slate-900">
+            <main className="min-h-screen bg-white text-slate-900">
               <Header />
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-emerald-100/70 to-white z-0"></div>
+              <Hero />
+              <PillarCards />
               <KYRSection />
               <FinderSection />
               <MutualAidSection />
