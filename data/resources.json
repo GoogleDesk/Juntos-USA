@@ -8,8 +8,15 @@
     "city": "Atlanta",
     "state": "GA",
     "zip": "30303",
-    "languages": ["es", "en"],
-    "categories": ["defensa", "trabajo", "vivienda"],
+    "languages": [
+      "es",
+      "en"
+    ],
+    "categories": [
+      "defensa",
+      "trabajo",
+      "vivienda"
+    ],
     "pro_bono": true,
     "wait_days": 7
   },
@@ -22,8 +29,14 @@
     "city": "Atlanta",
     "state": "GA",
     "zip": "30343",
-    "languages": ["es", "en"],
-    "categories": ["asilo", "defensa"],
+    "languages": [
+      "es",
+      "en"
+    ],
+    "categories": [
+      "asilo",
+      "defensa"
+    ],
     "pro_bono": true,
     "wait_days": 5
   },
@@ -36,12 +49,19 @@
     "city": "Atlanta",
     "state": "GA",
     "zip": "30345",
-    "languages": ["es", "en"],
-    "categories": ["asilo", "defensa", "trabajo", "vivienda"],
+    "languages": [
+      "es",
+      "en"
+    ],
+    "categories": [
+      "asilo",
+      "defensa",
+      "trabajo",
+      "vivienda"
+    ],
     "pro_bono": false,
     "wait_days": 10
   },
-
   {
     "id": 2001,
     "name": "The Legal Aid Society — Immigration Law Unit",
@@ -51,8 +71,14 @@
     "city": "New York",
     "state": "NY",
     "zip": "10038",
-    "languages": ["es", "en"],
-    "categories": ["defensa", "asilo"],
+    "languages": [
+      "es",
+      "en"
+    ],
+    "categories": [
+      "defensa",
+      "asilo"
+    ],
     "pro_bono": true,
     "wait_days": 7
   },
@@ -65,8 +91,15 @@
     "city": "New York",
     "state": "NY",
     "zip": "10004",
-    "languages": ["es", "en"],
-    "categories": ["asilo", "defensa", "trabajo"],
+    "languages": [
+      "es",
+      "en"
+    ],
+    "categories": [
+      "asilo",
+      "defensa",
+      "trabajo"
+    ],
     "pro_bono": true,
     "wait_days": 7
   },
@@ -79,12 +112,19 @@
     "city": "New York",
     "state": "NY",
     "zip": "10038",
-    "languages": ["es", "en"],
-    "categories": ["asilo", "defensa", "trabajo", "vivienda"],
+    "languages": [
+      "es",
+      "en"
+    ],
+    "categories": [
+      "asilo",
+      "defensa",
+      "trabajo",
+      "vivienda"
+    ],
     "pro_bono": false,
     "wait_days": 10
   },
-
   {
     "id": 3001,
     "name": "HIAS Pennsylvania",
@@ -94,8 +134,14 @@
     "city": "Philadelphia",
     "state": "PA",
     "zip": "19109",
-    "languages": ["es", "en"],
-    "categories": ["asilo", "defensa"],
+    "languages": [
+      "es",
+      "en"
+    ],
+    "categories": [
+      "asilo",
+      "defensa"
+    ],
     "pro_bono": true,
     "wait_days": 7
   },
@@ -108,8 +154,15 @@
     "city": "Philadelphia",
     "state": "PA",
     "zip": "19107",
-    "languages": ["es", "en"],
-    "categories": ["asilo", "defensa", "trabajo"],
+    "languages": [
+      "es",
+      "en"
+    ],
+    "categories": [
+      "asilo",
+      "defensa",
+      "trabajo"
+    ],
     "pro_bono": false,
     "wait_days": 10
   },
@@ -122,12 +175,18 @@
     "city": "Philadelphia",
     "state": "PA",
     "zip": "19140",
-    "languages": ["es", "en"],
-    "categories": ["trabajo", "naturalizacion", "familia"],
-    "pro_bono": lowCost = false,
+    "languages": [
+      "es",
+      "en"
+    ],
+    "categories": [
+      "trabajo",
+      "naturalizacion",
+      "familia"
+    ],
+    "pro_bono": false,
     "wait_days": 10
   },
-
   {
     "id": 4001,
     "name": "Rian Immigrant Center",
@@ -137,8 +196,15 @@
     "city": "Boston",
     "state": "MA",
     "zip": "02109",
-    "languages": ["es", "en"],
-    "categories": ["trabajo", "naturalizacion", "asilo"],
+    "languages": [
+      "es",
+      "en"
+    ],
+    "categories": [
+      "trabajo",
+      "naturalizacion",
+      "asilo"
+    ],
     "pro_bono": false,
     "wait_days": 10
   },
@@ -151,12 +217,17 @@
     "city": "Boston",
     "state": "MA",
     "zip": "02114",
-    "languages": ["es", "en"],
-    "categories": ["asilo", "defensa"],
+    "languages": [
+      "es",
+      "en"
+    ],
+    "categories": [
+      "asilo",
+      "defensa"
+    ],
     "pro_bono": true,
     "wait_days": 7
   },
-
   {
     "id": 5001,
     "name": "Ayuda — DC Office",
@@ -166,9 +237,16 @@
     "city": "Washington",
     "state": "DC",
     "zip": "20006",
-    "languages": ["es", "en"],
-    "categories": ["asilo", "defensa", "trabajo"],
-    "pro_bono": mix = true,
+    "languages": [
+      "es",
+      "en"
+    ],
+    "categories": [
+      "asilo",
+      "defensa",
+      "trabajo"
+    ],
+    "pro_bono": true,
     "wait_days": 7
   },
   {
@@ -180,8 +258,14 @@
     "city": "Washington",
     "state": "DC",
     "zip": "20006",
-    "languages": ["es", "en"],
-    "categories": ["defensa", "detencion"],
+    "languages": [
+      "es",
+      "en"
+    ],
+    "categories": [
+      "defensa",
+      "detencion"
+    ],
     "pro_bono": true,
     "wait_days": 7
   },
@@ -194,12 +278,18 @@
     "city": "Washington",
     "state": "DC",
     "zip": "20001",
-    "languages": ["es", "en"],
-    "categories": ["trabajo", "naturalizacion", "familia"],
-    "pro_bono": lowCost = false,
+    "languages": [
+      "es",
+      "en"
+    ],
+    "categories": [
+      "trabajo",
+      "naturalizacion",
+      "familia"
+    ],
+    "pro_bono": false,
     "wait_days": 10
   },
-
   {
     "id": 6001,
     "name": "Catholic Charities Dallas — Immigration Legal Services",
@@ -209,8 +299,15 @@
     "city": "Dallas",
     "state": "TX",
     "zip": "75247",
-    "languages": ["es", "en"],
-    "categories": ["trabajo", "naturalizacion", "familia"],
+    "languages": [
+      "es",
+      "en"
+    ],
+    "categories": [
+      "trabajo",
+      "naturalizacion",
+      "familia"
+    ],
     "pro_bono": false,
     "wait_days": 10
   },
@@ -223,8 +320,15 @@
     "city": "Dallas",
     "state": "TX",
     "zip": "75204",
-    "languages": ["es", "en"],
-    "categories": ["asilo", "defensa", "victimas"],
+    "languages": [
+      "es",
+      "en"
+    ],
+    "categories": [
+      "asilo",
+      "defensa",
+      "victimas"
+    ],
     "pro_bono": true,
     "wait_days": 7
   },
@@ -237,12 +341,17 @@
     "city": "Dallas",
     "state": "TX",
     "zip": "75247",
-    "languages": ["es", "en"],
-    "categories": ["defensa", "asilo"],
-    "pro_bono": mix = true,
+    "languages": [
+      "es",
+      "en"
+    ],
+    "categories": [
+      "defensa",
+      "asilo"
+    ],
+    "pro_bono": true,
     "wait_days": 7
   },
-
   {
     "id": 7001,
     "name": "American Gateways — Austin",
@@ -252,9 +361,16 @@
     "city": "Austin",
     "state": "TX",
     "zip": "78752",
-    "languages": ["es", "en"],
-    "categories": ["asilo", "defensa", "trabajo"],
-    "pro_bono": mix = true,
+    "languages": [
+      "es",
+      "en"
+    ],
+    "categories": [
+      "asilo",
+      "defensa",
+      "trabajo"
+    ],
+    "pro_bono": true,
     "wait_days": 7
   },
   {
@@ -266,12 +382,17 @@
     "city": "Austin",
     "state": "TX",
     "zip": "78741",
-    "languages": ["es", "en"],
-    "categories": ["defensa", "asilo"],
-    "pro_bono": mix = true,
+    "languages": [
+      "es",
+      "en"
+    ],
+    "categories": [
+      "defensa",
+      "asilo"
+    ],
+    "pro_bono": true,
     "wait_days": 7
   },
-
   {
     "id": 8001,
     "name": "Catholic Charities — St. Frances Cabrini Center (Houston)",
@@ -281,9 +402,16 @@
     "city": "Houston",
     "state": "TX",
     "zip": "77006",
-    "languages": ["es", "en"],
-    "categories": ["defensa", "familia", "victimas"],
-    "pro_bono": mix = true,
+    "languages": [
+      "es",
+      "en"
+    ],
+    "categories": [
+      "defensa",
+      "familia",
+      "victimas"
+    ],
+    "pro_bono": true,
     "wait_days": 10
   },
   {
@@ -295,8 +423,15 @@
     "city": "Houston",
     "state": "TX",
     "zip": "77057",
-    "languages": ["es", "en"],
-    "categories": ["naturalizacion", "familia", "trabajo"],
+    "languages": [
+      "es",
+      "en"
+    ],
+    "categories": [
+      "naturalizacion",
+      "familia",
+      "trabajo"
+    ],
     "pro_bono": false,
     "wait_days": 10
   },
@@ -309,12 +444,18 @@
     "city": "Houston",
     "state": "TX",
     "zip": "77036",
-    "languages": ["es", "en"],
-    "categories": ["naturalizacion", "trabajo", "familia"],
+    "languages": [
+      "es",
+      "en"
+    ],
+    "categories": [
+      "naturalizacion",
+      "trabajo",
+      "familia"
+    ],
     "pro_bono": false,
     "wait_days": 10
   },
-
   {
     "id": 9001,
     "name": "RAICES — San Antonio (HQ)",
@@ -324,9 +465,15 @@
     "city": "San Antonio",
     "state": "TX",
     "zip": "78216",
-    "languages": ["es", "en"],
-    "categories": ["defensa", "asilo"],
-    "pro_bono": mix = true,
+    "languages": [
+      "es",
+      "en"
+    ],
+    "categories": [
+      "defensa",
+      "asilo"
+    ],
+    "pro_bono": true,
     "wait_days": 7
   },
   {
@@ -338,9 +485,16 @@
     "city": "San Antonio",
     "state": "TX",
     "zip": "78207",
-    "languages": ["es", "en"],
-    "categories": ["asilo", "defensa", "trabajo"],
-    "pro_bono": mix = true,
+    "languages": [
+      "es",
+      "en"
+    ],
+    "categories": [
+      "asilo",
+      "defensa",
+      "trabajo"
+    ],
+    "pro_bono": true,
     "wait_days": 7
   }
 ]
