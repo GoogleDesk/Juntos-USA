@@ -5,12 +5,119 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Immigrant Support — Legal Resources Nearby</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com">
+      // --- Map (Leaflet + OSM) ---
+      const mapRef = { current: null };
+      const markersRef = { current: [] };
+
+      function initMap() {
+        if (mapRef.current || typeof L === "undefined") return;
+        mapRef.current = L.map("finder-map", { zoomControl: true, attributionControl: true })
+          .setView([39.5, -98.35], 4);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19,
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(mapRef.current);
+      }
+      initMap();
+
+      function updateMap(results) {
+        const map = mapRef.current;
+        if (!map) return;
+        markersRef.current.forEach(m => map.removeLayer(m));
+        markersRef.current = [];
+        const bounds = [];
+        results.forEach(r => {
+          if (typeof r.lat === "number" && typeof r.lng === "number") {
+            const m = L.marker([r.lat, r.lng]).addTo(map);
+            m.bindPopup(`<strong>${r.name || ""}</strong><br/>${r.address || ""}`);
+            markersRef.current.push(m);
+            bounds.push([r.lat, r.lng]);
+          }
+        });
+        if (bounds.length) {
+          map.fitBounds(bounds, { padding: [30, 30] });
+        }
+      }
+    
+</script>
     <script>
       tailwind.config = { theme: { extend: {} }, corePlugins: { preflight: true } };
-    </script>
+    
+      // --- Map (Leaflet + OSM) ---
+      const mapRef = { current: null };
+      const markersRef = { current: [] };
+
+      function initMap() {
+        if (mapRef.current || typeof L === "undefined") return;
+        mapRef.current = L.map("finder-map", { zoomControl: true, attributionControl: true })
+          .setView([39.5, -98.35], 4);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19,
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(mapRef.current);
+      }
+      initMap();
+
+      function updateMap(results) {
+        const map = mapRef.current;
+        if (!map) return;
+        markersRef.current.forEach(m => map.removeLayer(m));
+        markersRef.current = [];
+        const bounds = [];
+        results.forEach(r => {
+          if (typeof r.lat === "number" && typeof r.lng === "number") {
+            const m = L.marker([r.lat, r.lng]).addTo(map);
+            m.bindPopup(`<strong>${r.name || ""}</strong><br/>${r.address || ""}`);
+            markersRef.current.push(m);
+            bounds.push([r.lat, r.lng]);
+          }
+        });
+        if (bounds.length) {
+          map.fitBounds(bounds, { padding: [30, 30] });
+        }
+      }
+    
+</script>
     <style>html,body{height:100%}body{background:#fff;color:#0f172a}</style>
-  </head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+      // --- Map (Leaflet + OSM) ---
+      const mapRef = { current: null };
+      const markersRef = { current: [] };
+
+      function initMap() {
+        if (mapRef.current || typeof L === "undefined") return;
+        mapRef.current = L.map("finder-map", { zoomControl: true, attributionControl: true })
+          .setView([39.5, -98.35], 4);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19,
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(mapRef.current);
+      }
+      initMap();
+
+      function updateMap(results) {
+        const map = mapRef.current;
+        if (!map) return;
+        markersRef.current.forEach(m => map.removeLayer(m));
+        markersRef.current = [];
+        const bounds = [];
+        results.forEach(r => {
+          if (typeof r.lat === "number" && typeof r.lng === "number") {
+            const m = L.marker([r.lat, r.lng]).addTo(map);
+            m.bindPopup(`<strong>${r.name || ""}</strong><br/>${r.address || ""}`);
+            markersRef.current.push(m);
+            bounds.push([r.lat, r.lng]);
+          }
+        });
+        if (bounds.length) {
+          map.fitBounds(bounds, { padding: [30, 30] });
+        }
+      }
+    
+</script>
+</head>
   <body class="min-h-screen bg-white text-slate-900">
     <header class="border-b border-slate-200 bg-white sticky top-0 z-40 shadow-md">
       <div class="mx-auto max-w-6xl px-4 h-14 flex items-center gap-6">
@@ -59,8 +166,8 @@
         <div class="mt-5 grid gap-4 lg:grid-cols-3">
           <div id="results" class="lg:col-span-2 space-y-3"></div>
           <div class="rounded-xl border border-slate-200 bg-slate-50 p-3">
-            <div id="map-ph" class="aspect-[4/3] w-full rounded-lg bg-[linear-gradient(45deg,#e2e8f0,#cbd5e1)] flex items-center justify-center text-slate-600 text-sm">Map (placeholder)</div>
-            <p id="map-note" class="mt-2 text-xs text-slate-600">Note: this map is a placeholder.</p>
+            <div id="finder-map" class="aspect-[4/3] w-full rounded-lg bg-[linear-gradient(45deg,#e2e8f0,#cbd5e1)] flex items-center justify-center text-slate-600 text-sm"></div>
+            <p id="map-note" class="mt-2 text-xs text-slate-600">Note: OpenStreetMap</p>
           </div>
         </div>
       </div>
@@ -96,7 +203,7 @@
             langToggle: "Switch to Spanish", langToggleAlt: "Switch to English",
             zipcode: "ZIP code", category: "Category", proBonoOnly: "Pro bono only",
             noResults: "No results. Try another category or expand the area.",
-            mapNote: "Note: this map is a placeholder.", mapPH: "Map (placeholder)",
+            mapNote: "Note: OpenStreetMap", mapPH: "",
             call: "Call", website: "Website"
           },
           cats: { asilo: "Asylum", daca: "DACA", defensa: "Removal defense", trabajo: "Work", vivienda: "Housing", salud: "Health" },
@@ -197,6 +304,7 @@
         const wrap = document.getElementById('results');
         wrap.innerHTML = res.length ? res.map(card).join('') :
           `<div class="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden"><div class="p-4 text-sm text-slate-600">${t().labels.noResults}</div></div>`;
+        updateMap(res);
       }
 
       // Init
@@ -206,10 +314,45 @@
 
       syncHeader(); syncStatic();
 
-      fetch('data/resources.json')
+      fetch('data/resources.cleaned.json')
         .then(r => r.json())
         .then(j => { state.data = Array.isArray(j) ? j : []; render(); })
         .catch(() => { state.data = []; render(); });
-    </script>
+    
+      // --- Map (Leaflet + OSM) ---
+      const mapRef = { current: null };
+      const markersRef = { current: [] };
+
+      function initMap() {
+        if (mapRef.current || typeof L === "undefined") return;
+        mapRef.current = L.map("finder-map", { zoomControl: true, attributionControl: true })
+          .setView([39.5, -98.35], 4);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19,
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(mapRef.current);
+      }
+      initMap();
+
+      function updateMap(results) {
+        const map = mapRef.current;
+        if (!map) return;
+        markersRef.current.forEach(m => map.removeLayer(m));
+        markersRef.current = [];
+        const bounds = [];
+        results.forEach(r => {
+          if (typeof r.lat === "number" && typeof r.lng === "number") {
+            const m = L.marker([r.lat, r.lng]).addTo(map);
+            m.bindPopup(`<strong>${r.name || ""}</strong><br/>${r.address || ""}`);
+            markersRef.current.push(m);
+            bounds.push([r.lat, r.lng]);
+          }
+        });
+        if (bounds.length) {
+          map.fitBounds(bounds, { padding: [30, 30] });
+        }
+      }
+    
+</script>
   </body>
 </html>
