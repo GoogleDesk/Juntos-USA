@@ -1,358 +1,287 @@
-
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Immigrant Support — Legal Resources Nearby</title>
-    <script src="https://cdn.tailwindcss.com">
-      // --- Map (Leaflet + OSM) ---
-      const mapRef = { current: null };
-      const markersRef = { current: [] };
+    <title>Recursos Legales Cercanos — ApoyoYA</title>
 
-      function initMap() {
-        if (mapRef.current || typeof L === "undefined") return;
-        mapRef.current = L.map("finder-map", { zoomControl: true, attributionControl: true })
-          .setView([39.5, -98.35], 4);
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          maxZoom: 19,
-          attribution: '&copy; OpenStreetMap contributors'
-        }).addTo(mapRef.current);
-      }
-      initMap();
-
-      function updateMap(results) {
-        const map = mapRef.current;
-        if (!map) return;
-        markersRef.current.forEach(m => map.removeLayer(m));
-        markersRef.current = [];
-        const bounds = [];
-        results.forEach(r => {
-          if (typeof r.lat === "number" && typeof r.lng === "number") {
-            const m = L.marker([r.lat, r.lng]).addTo(map);
-            m.bindPopup(`<strong>${r.name || ""}</strong><br/>${r.address || ""}`);
-            markersRef.current.push(m);
-            bounds.push([r.lat, r.lng]);
-          }
-        });
-        if (bounds.length) {
-          map.fitBounds(bounds, { padding: [30, 30] });
-        }
-      }
-    
-</script>
+    <!-- Tailwind via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      tailwind.config = { theme: { extend: {} }, corePlugins: { preflight: true } };
-    
-      // --- Map (Leaflet + OSM) ---
-      const mapRef = { current: null };
-      const markersRef = { current: [] };
+      tailwind.config = {
+        theme: { extend: {} },
+        corePlugins: { preflight: true }
+      };
+    </script>
 
-      function initMap() {
-        if (mapRef.current || typeof L === "undefined") return;
-        mapRef.current = L.map("finder-map", { zoomControl: true, attributionControl: true })
-          .setView([39.5, -98.35], 4);
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          maxZoom: 19,
-          attribution: '&copy; OpenStreetMap contributors'
-        }).addTo(mapRef.current);
-      }
-      initMap();
+    <!-- React 18 UMD + Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-      function updateMap(results) {
-        const map = mapRef.current;
-        if (!map) return;
-        markersRef.current.forEach(m => map.removeLayer(m));
-        markersRef.current = [];
-        const bounds = [];
-        results.forEach(r => {
-          if (typeof r.lat === "number" && typeof r.lng === "number") {
-            const m = L.marker([r.lat, r.lng]).addTo(map);
-            m.bindPopup(`<strong>${r.name || ""}</strong><br/>${r.address || ""}`);
-            markersRef.current.push(m);
-            bounds.push([r.lat, r.lng]);
-          }
-        });
-        if (bounds.length) {
-          map.fitBounds(bounds, { padding: [30, 30] });
-        }
-      }
-    
-</script>
-    <style>html,body{height:100%}body{background:#fff;color:#0f172a}</style>
+    <!-- Leaflet (Map) -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
-      // --- Map (Leaflet + OSM) ---
-      const mapRef = { current: null };
-      const markersRef = { current: [] };
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-      function initMap() {
-        if (mapRef.current || typeof L === "undefined") return;
-        mapRef.current = L.map("finder-map", { zoomControl: true, attributionControl: true })
-          .setView([39.5, -98.35], 4);
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          maxZoom: 19,
-          attribution: '&copy; OpenStreetMap contributors'
-        }).addTo(mapRef.current);
-      }
-      initMap();
+    <style>
+      html, body, #root { height: 100%; }
+      body { background:#fff; color:#0f172a; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
 
-      function updateMap(results) {
-        const map = mapRef.current;
-        if (!map) return;
-        markersRef.current.forEach(m => map.removeLayer(m));
-        markersRef.current = [];
-        const bounds = [];
-        results.forEach(r => {
-          if (typeof r.lat === "number" && typeof r.lng === "number") {
-            const m = L.marker([r.lat, r.lng]).addTo(map);
-            m.bindPopup(`<strong>${r.name || ""}</strong><br/>${r.address || ""}`);
-            markersRef.current.push(m);
-            bounds.push([r.lat, r.lng]);
-          }
-        });
-        if (bounds.length) {
-          map.fitBounds(bounds, { padding: [30, 30] });
-        }
-      }
-    
-</script>
-</head>
-  <body class="min-h-screen bg-white text-slate-900">
-    <header class="border-b border-slate-200 bg-white sticky top-0 z-40 shadow-md">
-      <div class="mx-auto max-w-6xl px-4 h-14 flex items-center gap-6">
-        <a href="index.html" class="flex items-center gap-2">
-          <div class="h-8 w-8 rounded-xl bg-emerald-700"></div>
-          <span id="brand" class="font-semibold text-slate-900">Immigrant Support</span>
-        </a>
-        <nav class="hidden sm:flex items-center gap-4 text-sm font-medium text-slate-800">
-          <!-- HOME LINK REMOVED PER REQUEST -->
-          <a id="nav-rights" href="index.html#kyr" class="hover:text-emerald-700">Know Your Rights</a>
-          <a id="nav-finder" href="finder.html" class="hover:text-emerald-700">Legal Resources Nearby</a>
-          <a id="nav-mutual" href="index.html#mutual" class="hover:text-emerald-700">Mutual Aid Nearby</a>
-          <a id="nav-edu" href="index.html#edu" class="hover:text-emerald-700">Education Hub</a>
-        </nav>
-        <button id="toggle" class="ml-auto inline-flex items-center gap-2 rounded-lg bg-slate-100 px-3 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-200 border border-slate-300 shadow-sm" aria-label="Toggle language">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <path d="M2 12h20"></path>
-            <path d="M12 2a15.3 15.3 0 0 1 0 20"></path>
-          </svg>
-          <span id="toggle-text">Switch to Spanish</span>
-        </button>
-      </div>
-    </header>
+    <script type="text/babel">
+      const { useState, useEffect, useMemo, createContext, useContext, useRef } = React;
 
-    <main class="mx-auto max-w-6xl px-4 py-6">
-      <h1 id="title" class="text-2xl sm:text-3xl font-semibold text-slate-900 mb-2">Legal Resources Nearby</h1>
-      <p id="subtitle" class="text-slate-600 mb-4">Find trustworthy legal help by area and category.</p>
-
-      <div class="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5">
-        <div class="flex flex-col sm:flex-row gap-3 sm:items-end">
-          <div class="flex-1">
-            <label id="zip-label" class="text-sm text-slate-700">ZIP code</label>
-            <input id="zip" inputmode="numeric" placeholder="30303" class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400">
-          </div>
-          <div class="flex-1">
-            <label id="cat-label" class="text-sm text-slate-700">Category</label>
-            <div id="cat-pills" class="mt-1 flex flex-wrap gap-2"></div>
-          </div>
-          <div class="flex items-center gap-2">
-            <input id="probono" type="checkbox" class="h-4 w-4 rounded border-slate-300">
-            <label id="pb-label" for="probono" class="text-sm text-slate-700">Pro bono only</label>
-          </div>
-        </div>
-
-        <div class="mt-5 grid gap-4 lg:grid-cols-3">
-          <div id="results" class="lg:col-span-2 space-y-3"></div>
-          <div class="rounded-xl border border-slate-200 bg-slate-50 p-3">
-            <div id="finder-map" class="aspect-[4/3] w-full rounded-lg bg-[linear-gradient(45deg,#e2e8f0,#cbd5e1)] flex items-center justify-center text-slate-600 text-sm"></div>
-            <p id="map-note" class="mt-2 text-xs text-slate-600">Note: OpenStreetMap</p>
-          </div>
-        </div>
-      </div>
-    </main>
-
-    <footer class="border-t border-slate-200 bg-white shadow-inner">
-      <div class="mx-auto max-w-6xl px-4 py-6 text-sm text-slate-600">
-        <p id="footnote">© <span id="year"></span> Immigrant Support. Educational information; not legal advice.</p>
-      </div>
-    </footer>
-
-    <script>
+      // --- i18n ---
+      const SUPPORTED_LANGS = ["es","en"];
       const COPY = {
         es: {
           brand: "Apoyo a Inmigrantes",
-          nav: { derechos: "Conozca Sus Derechos", buscador: "Recursos Legales Cercanos", red: "Apoyo Mutuo Cercano", edu: "Centro Educativo" },
-          finder: { title: "Recursos Legales Cercanos", sub: "Encuentre ayuda legal confiable por zona y categoría." },
+          sections: { finderTitle: "Recursos Legales Cercanos", finderSub: "Busque por código postal, categoría y pro bono" },
           labels: {
-            langToggle: "Cambiar a inglés", langToggleAlt: "Cambiar a español",
-            zipcode: "Código postal", category: "Categoría", proBonoOnly: "Solo pro bono",
-            noResults: "No hay resultados. Pruebe otra categoría o amplíe el área.",
-            mapNote: "Nota: este mapa es un ejemplo.", mapPH: "Mapa (ejemplo)",
-            call: "Llamar", website: "Sitio web"
-          },
-          cats: { asilo: "Asilo", daca: "DACA", defensa: "Defensa contra deportación", trabajo: "Trabajo", vivienda: "Vivienda", salud: "Salud" },
-          foot: "Información educativa; no es asesoría legal."
+            zipcode: "Código postal",
+            category: "Categoría",
+            proBonoOnly: "Solo pro bono",
+            call: "Llamar",
+            website: "Sitio web",
+            noResults: "No se encontraron resultados con estos filtros.",
+            mapNote: "Mapa provisto por OpenStreetMap"
+          }
         },
         en: {
           brand: "Immigrant Support",
-          nav: { derechos: "Know Your Rights", buscador: "Legal Resources Nearby", red: "Mutual Aid Nearby", edu: "Education Hub" },
-          finder: { title: "Legal Resources Nearby", sub: "Find trustworthy legal help by area and category." },
+          sections: { finderTitle: "Legal Resources Nearby", finderSub: "Filter by ZIP, category and pro bono" },
           labels: {
-            langToggle: "Switch to Spanish", langToggleAlt: "Switch to English",
-            zipcode: "ZIP code", category: "Category", proBonoOnly: "Pro bono only",
-            noResults: "No results. Try another category or expand the area.",
-            mapNote: "Note: OpenStreetMap", mapPH: "",
-            call: "Call", website: "Website"
-          },
-          cats: { asilo: "Asylum", daca: "DACA", defensa: "Removal defense", trabajo: "Work", vivienda: "Housing", salud: "Health" },
-          foot: "Educational information; not legal advice."
+            zipcode: "ZIP code",
+            category: "Category",
+            proBonoOnly: "Pro bono only",
+            call: "Call",
+            website: "Website",
+            noResults: "No results for these filters.",
+            mapNote: "Map provided by OpenStreetMap"
+          }
+        }
+      };
+      const LangCtx = createContext({ lang: "es", setLang: () => {} });
+      const useI18n = () => useContext(LangCtx);
+      const safeCopy = (lang) => COPY[SUPPORTED_LANGS.includes(lang) ? lang : "es"];
+
+      // --- categories ---
+      const CATEGORIES = ["asilo","defensa","trabajo","vivienda","naturalizacion","familia","detencion"];
+      const CATEGORY_LABELS = {
+        es: {
+          asilo: "Asilo", defensa: "Defensa", trabajo: "Trabajo", vivienda: "Vivienda",
+          naturalizacion: "Naturalización", familia: "Familia", detencion: "Detención"
+        },
+        en: {
+          asilo: "Asylum", defensa: "Defense", trabajo: "Work", vivienda: "Housing",
+          naturalizacion: "Naturalization", familia: "Family", detencion: "Detention"
         }
       };
 
-      // Persisted language
-      function getLang(){
-        const q = new URLSearchParams(location.search).get('lang');
-        const ls = localStorage.getItem('juntos_lang');
-        const x = (q === 'es' || q === 'en') ? q : (ls || 'en');
-        localStorage.setItem('juntos_lang', x);
-        return x;
+      // --- UI helpers ---
+      function Badge({ children }) {
+        return <span className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-2 py-0.5 text-xs text-slate-700">{children}</span>;
       }
-      function setLang(next){
-        const sp = new URLSearchParams(location.search); sp.set('lang', next);
-        localStorage.setItem('juntos_lang', next);
-        location.search = sp.toString();
+      function CTAButton({ href, children, variant="primary" }) {
+        const base = "inline-flex items-center justify-center rounded-lg px-3 py-2 text-sm font-semibold shadow-sm border";
+        const style = variant === "secondary"
+          ? " bg-white text-slate-800 hover:bg-slate-50 border-slate-300"
+          : " bg-emerald-600 text-white hover:bg-emerald-700 border-emerald-700";
+        return <a href={href} className={base + style} target={href?.startsWith("http") ? "_blank": undefined} rel="noreferrer">{children}</a>;
+      }
+      function Card({ children }) {
+        return <div className="rounded-2xl border border-slate-200 bg-white">{children}</div>;
+      }
+      function Pill({ children, active, onClick }) {
+        const base = "inline-flex items-center rounded-full px-3 py-1 text-sm border";
+        const cls = active
+          ? " bg-emerald-600 text-white border-emerald-700"
+          : " bg-white text-slate-800 hover:bg-slate-50 border-slate-300";
+        return <button onClick={onClick} className={base + " " + cls}>{children}</button>;
       }
 
-      const state = { lang: getLang(), data: [], cat: null, zip: "", pb: false };
-
-      function t(){ return COPY[state.lang]; }
-      function isES(){ return state.lang === 'es'; }
-
-      function syncHeader(){
-        document.getElementById('brand').textContent = t().brand;
-        document.getElementById('nav-rights').textContent = t().nav.derechos;
-        document.getElementById('nav-finder').textContent = t().nav.buscador;
-        document.getElementById('nav-mutual').textContent = t().nav.red;
-        document.getElementById('nav-edu').textContent = t().nav.edu;
-
-        // Ensure links preserve ?lang
-        for (const a of document.querySelectorAll('nav a')){
-          const u = new URL(a.getAttribute('href'), location.href);
-          u.searchParams.set('lang', state.lang);
-          a.setAttribute('href', u.pathname + '?' + u.searchParams.toString());
+      // --- sanitizer for /data/resources.json ---
+      async function loadResources() {
+        const res = await fetch("./data/resources.json", { cache: "no-store" });
+        const text = await res.text();
+        const cleaned = text
+          .replace(/mix\s*=\s*true/gi, "true")
+          .replace(/lowCost\s*=\s*false/gi, "false");
+        try {
+          return JSON.parse(cleaned);
+        } catch (e) {
+          console.error("JSON parse error", e);
+          return [];
         }
-
-        const text = isES() ? COPY.en.labels.langToggleAlt : COPY.es.labels.langToggleAlt;
-        document.getElementById('toggle-text').textContent = text;
-        document.getElementById('toggle').setAttribute('aria-label', text);
       }
 
-      function syncStatic(){
-        document.getElementById('title').textContent = t().finder.title;
-        document.getElementById('subtitle').textContent = t().finder.sub;
-        document.getElementById('zip-label').textContent = t().labels.zipcode;
-        document.getElementById('cat-label').textContent = t().labels.category;
-        document.getElementById('pb-label').textContent = t().labels.proBonoOnly;
-        document.getElementById('map-ph').textContent = t().labels.mapPH;
-        document.getElementById('map-note').textContent = t().labels.mapNote;
-        document.getElementById('footnote').innerHTML = `© <span id="year"></span> ${t().brand}. ${t().foot}`;
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        // Build category pills
-        const cats = t().cats;
-        const holder = document.getElementById('cat-pills'); holder.innerHTML = '';
-        Object.keys(cats).forEach((id) => {
-          const btn = document.createElement('button');
-          btn.className = "rounded-full px-3 py-1 text-sm border transition bg-white text-slate-700 border-slate-300 hover:border-slate-400";
-          btn.textContent = cats[id];
-          btn.onclick = () => { state.cat = (state.cat === id) ? null : id; render(); };
-          holder.appendChild(btn);
-        });
-      }
-
-      function card(org){
-        const cats = (org.categories || []).map(c => t().cats[c] || c);
-        return `<div class="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
-          <div class="p-4 sm:p-5">
-            <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
-              <div>
-                <h4 class="font-semibold text-slate-900">${org.name || ""}</h4>
-                <p class="text-sm text-slate-600">${org.address || ""}</p>
-                <div class="mt-2 flex flex-wrap gap-2">
-                  ${cats.map(c => `<span class="inline-flex items-center rounded-full border border-slate-300 px-2 py-0.5 text-xs text-slate-600">${c}</span>`).join('')}
-                  ${org.pro_bono ? '<span class="inline-flex items-center rounded-full border border-slate-300 px-2 py-0.5 text-xs text-slate-600">Pro bono</span>' : ''}
-                </div>
-              </div>
-              <div class="flex gap-2">
-                ${org.phone ? `<a href="tel:${org.phone}" class="inline-flex items-center justify-center rounded-xl bg-emerald-700 px-4 py-2 text-white font-medium hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-400">${t().labels.call}</a>` : ''}
-                ${org.website ? `<a href="${org.website}" target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-xl border border-slate-300 px-4 py-2 text-slate-800 font-medium hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-300">${t().labels.website}</a>` : ''}
-              </div>
-            </div>
-          </div>
-        </div>`;
-      }
-
-      function render(){
-        // Sync header toggle text every render in case lang changed.
-        syncHeader();
-
-        const zip = document.getElementById('zip').value.trim();
-        const res = state.data.filter(r => (zip ? (r.zip || "").startsWith(zip) : true) && (state.cat ? (r.categories || []).includes(state.cat) : true) && (state.pb ? !!r.pro_bono : true));
-
-        const wrap = document.getElementById('results');
-        wrap.innerHTML = res.length ? res.map(card).join('') :
-          `<div class="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden"><div class="p-4 text-sm text-slate-600">${t().labels.noResults}</div></div>`;
-        updateMap(res);
-      }
-
-      // Init
-      document.getElementById('toggle').addEventListener('click', () => setLang(isES() ? 'en' : 'es'));
-      document.getElementById('zip').addEventListener('input', render);
-      document.getElementById('probono').addEventListener('change', (e) => { state.pb = e.target.checked; render(); });
-
-      syncHeader(); syncStatic();
-
-      fetch('data/resources.cleaned.json')
-        .then(r => r.json())
-        .then(j => { state.data = Array.isArray(j) ? j : []; render(); })
-        .catch(() => { state.data = []; render(); });
-    
-      // --- Map (Leaflet + OSM) ---
+      // --- Map helpers ---
       const mapRef = { current: null };
       const markersRef = { current: [] };
-
       function initMap() {
         if (mapRef.current || typeof L === "undefined") return;
         mapRef.current = L.map("finder-map", { zoomControl: true, attributionControl: true })
           .setView([39.5, -98.35], 4);
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
           maxZoom: 19,
-          attribution: '&copy; OpenStreetMap contributors'
+          attribution: "&copy; OpenStreetMap contributors"
         }).addTo(mapRef.current);
       }
-      initMap();
-
       function updateMap(results) {
-        const map = mapRef.current;
-        if (!map) return;
-        markersRef.current.forEach(m => map.removeLayer(m));
+        initMap();
+        if (!mapRef.current) return;
+        // clear markers
+        markersRef.current.forEach(m => mapRef.current.removeLayer(m));
         markersRef.current = [];
         const bounds = [];
-        results.forEach(r => {
+        (results || []).forEach(r => {
           if (typeof r.lat === "number" && typeof r.lng === "number") {
-            const m = L.marker([r.lat, r.lng]).addTo(map);
-            m.bindPopup(`<strong>${r.name || ""}</strong><br/>${r.address || ""}`);
+            const m = L.marker([r.lat, r.lng]).addTo(mapRef.current);
+            m.bindPopup(\`<strong>\${r.name || ""}</strong><br/>\${r.address || ""}\`);
             markersRef.current.push(m);
             bounds.push([r.lat, r.lng]);
           }
         });
-        if (bounds.length) {
-          map.fitBounds(bounds, { padding: [30, 30] });
-        }
+        if (bounds.length) mapRef.current.fitBounds(bounds, { padding:[30,30] });
       }
-    
-</script>
+
+      // --- Main Finder Page ---
+      function FinderPage() {
+        const { lang } = useI18n();
+        const t = safeCopy(lang);
+
+        const [all, setAll] = useState([]);
+        const [zip, setZip] = useState("");
+        const [cat, setCat] = useState(null);
+        const [pb, setPb] = useState(false);
+        const [loading, setLoading] = useState(true);
+        const [error, setError] = useState(null);
+
+        useEffect(() => {
+          let alive = true;
+          (async () => {
+            try {
+              setLoading(true);
+              const data = await loadResources();
+              if (alive) setAll(Array.isArray(data) ? data : []);
+            } catch (e) {
+              if (alive) setError(e?.message || "Load error");
+            } finally {
+              if (alive) setLoading(false);
+            }
+          })();
+          return () => { alive = false; };
+        }, []);
+
+        const results = useMemo(() => {
+          return all.filter(r => {
+            const zipOk = zip ? String(r.zip || "").startsWith(zip) : true;
+            const catOk = cat ? Array.isArray(r.categories) && r.categories.includes(cat) : true;
+            const pbOk = pb ? !!r.pro_bono : true;
+            return zipOk && catOk && pbOk;
+          });
+        }, [all, zip, cat, pb]);
+
+        useEffect(() => { updateMap(results); }, [results]);
+
+        return (
+          <main className="min-h-screen">
+            <header className="border-b border-slate-200 bg-white sticky top-0 z-40 shadow-md">
+              <div className="max-w-6xl mx-auto px-4 h-14 flex items-center gap-6">
+                <a href="/" className="flex items-center gap-2">
+                  <img src="/logo.png" alt="ApoyoYA logo" className="h-8 w-8" />
+                  <span className="font-semibold text-slate-900">{t.brand}</span>
+                </a>
+              </div>
+            </header>
+
+            <div className="max-w-6xl mx-auto px-4 py-8">
+              <h1 className="text-2xl font-semibold text-slate-900">{t.sections.finderTitle}</h1>
+              <p className="text-slate-600">{t.sections.finderSub}</p>
+
+              <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-4 sm:p-5">
+                <div className="flex flex-col sm:flex-row gap-3 sm:items-end">
+                  <div className="flex-1">
+                    <label className="text-sm text-slate-700">{t.labels.zipcode}</label>
+                    <input value={zip} onChange={(e)=>setZip(e.target.value)} inputMode="numeric" placeholder="30303"
+                      className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400" />
+                  </div>
+                  <div className="flex-1">
+                    <label className="text-sm text-slate-700">{t.labels.category}</label>
+                    <div className="mt-1 flex flex-wrap gap-2">
+                      {CATEGORIES.map((id) => (
+                        <Pill key={id} active={cat===id} onClick={()=>setCat(cat===id?null:id)}>
+                          {CATEGORY_LABELS[(SUPPORTED_LANGS.includes(lang)?lang:'es')][id]}
+                        </Pill>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <input id="pb" type="checkbox" checked={pb} onChange={(e)=>setPb(e.target.checked)} className="h-4 w-4 rounded border-slate-300" />
+                    <label htmlFor="pb" className="text-sm text-slate-700">{t.labels.proBonoOnly}</label>
+                  </div>
+                </div>
+
+                <div className="mt-5 grid gap-4 lg:grid-cols-3">
+                  <div className="lg:col-span-2 space-y-3">
+                    {loading ? (
+                      <Card><div className="p-4 text-sm text-slate-600">Loading…</div></Card>
+                    ) : error ? (
+                      <Card><div className="p-4 text-sm text-red-700">Error: {error}</div></Card>
+                    ) : results.length === 0 ? (
+                      <Card><div className="p-4 text-sm text-slate-600">{t.labels.noResults}</div></Card>
+                    ) : (
+                      results.map((r) => (
+                        <Card key={r.id}>
+                          <div className="p-4 sm:p-5">
+                            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+                              <div>
+                                <h4 className="font-semibold text-slate-900">{r.name}</h4>
+                                <p className="text-sm text-slate-600">{r.address}</p>
+                                <div className="mt-2 flex flex-wrap gap-2">
+                                  {(r.categories || []).map((c) => (
+                                    <Badge key={c}>{CATEGORY_LABELS[(SUPPORTED_LANGS.includes(lang)?lang:'es')][c] || c}</Badge>
+                                  ))}
+                                  {r.pro_bono ? <Badge>Pro bono</Badge> : null}
+                                  <Badge>{(r.languages || []).join('/') || 'Es/En'}</Badge>
+                                </div>
+                              </div>
+                              <div className="flex gap-2">
+                                {r.phone && <CTAButton href={`tel:${r.phone}`}>{t.labels.call}</CTAButton>}
+                                {r.website && <CTAButton href={r.website} variant="secondary">{t.labels.website}</CTAButton>}
+                              </div>
+                            </div>
+                          </div>
+                        </Card>
+                      ))
+                    )}
+                  </div>
+
+                  <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+                    <div id="finder-map" className="aspect-[4/3] w-full rounded-lg"></div>
+                    <p className="mt-2 text-xs text-slate-600">{t.labels.mapNote}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </main>
+        );
+      }
+
+      function App() {
+        const [lang, setLang] = useState("es");
+        return (
+          <LangCtx.Provider value={{ lang, setLang }}>
+            <FinderPage />
+          </LangCtx.Provider>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
   </body>
 </html>
